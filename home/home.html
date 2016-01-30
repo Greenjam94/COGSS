@@ -1,17 +1,28 @@
 <div id="home" class="panel-body" data-ng-controller="HomeCtrl as home">
     <h3>Welcome, {{home.user.name}}!</h3>
-    <h4>Favorite Games</h4>
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Meets you have access to</div>
 
-    <ul>
-        <!--
-            EXERCISE #8
-            Create an li for game in home.user.games
-            For each game, conditionally add a class of 'beat' based on the value the game's beat property
-            On click of the li, call home.changeGameStatus() in home.js
-        -->
-    </ul>
+        <!-- Table -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Host</th>
+                    <th>Location</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Michigan Madness</td>
+                    <td>EMU</td>
+                    <td>Ypsi, MI</td>
+                    <td>March</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-    <input type="text" class="form-control" data-ng-model="home.newGame.title" placeholder="Game Title">
-    <button data-ng-click="home.addGame()" class="btn btn-success">Add Game</button><br>
-    <button data-ng-click="home.logout()" class="btn btn-danger">Logout</button>
 </div>

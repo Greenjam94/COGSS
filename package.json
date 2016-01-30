@@ -20,6 +20,7 @@
         "express": "4.x",
         "lodash": "*",
         "matchdep": "*",
+        "mysql": "*",
         "nodemon": "^1.3.7",
         "body-parser": "^1.13.2",
         "grunt": "^0.4.5",

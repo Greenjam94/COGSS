@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html data-ng-app="skill-up-ng-app">
 <head>
-    <title>Skill-Up 2015 East Lansing</title>
+    <title>COGSS 2.0</title>
     <link rel="stylesheet" type="text/css" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
     <link rel="stylesheet" type="text/css" href="/app.css">
@@ -13,9 +13,63 @@
     <script type="text/javascript" src="/home/home.js"></script>
 </head>
 <body data-ng-controller="MainCtrl as main">
-<div class="jumbotron">
-    <h1>Skill-Up 2015 East Lansing</h1>
-</div>
-<data-ng-view></data-ng-view>
+    <div class="container">
+        <div class="page-header">
+            <h1>Collegiate Online Gymnastics Scoring System</h1>
+        </div>
+
+        <!-- Navbar -->
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">COGSS 2.0</a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class=""><a href="/#/home">Home <span class="sr-only">(current)</span></a></li>
+                        <li class=""><a href="#">Scores</a></li>
+                        <!-- <li class=""><a href="review.php">Review</a></li> -->
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#" data-toggle="modal" data-target="#logInModal">Log In</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                More<span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li id="signUpButton"><a href="#">Sign Up</a></li>
+                                <li id="contactUsButton"><a href="#">Contact Us</a></li>
+                                <li class="divider"></li>
+                                <li><a href="http://greenjam94.me">Greenjam94.me</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="navbar-form navbar-right" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </form>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+
+        <data-ng-view></data-ng-view>
+
+    </div>
+
+    <div align=center>
+        <p style="clear:both;"><small>This website was created and hosted by James Green for your use!<br>
+            See the source at <a href="https://github.com/Greenjam94/COGSS">Github</a></small></p>
+    </div>
+
 </body>
 </html>
