@@ -10,7 +10,7 @@
     <script type="text/javascript" src="/node_modules/angular-route/angular-route.min.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
     <script type="text/javascript" src="/login/login.js"></script>
-    <script type="text/javascript" src="/home/home.js"></script>
+    <script type="text/javascript" src="/meets/meets.js"></script>
 </head>
 <body data-ng-controller="MainCtrl as main">
     <div class="container">
@@ -18,7 +18,6 @@
             <h1>Collegiate Online Gymnastics Scoring System</h1>
         </div>
 
-        <!-- Navbar -->
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -29,24 +28,22 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">COGSS 2.0</a>
+                    <a class="navbar-brand" href="#/">COGSS 2.0</a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class=""><a href="/#/home">Home <span class="sr-only">(current)</span></a></li>
-                        <li class=""><a href="#">Scores</a></li>
-                        <!-- <li class=""><a href="review.php">Review</a></li> -->
+                        <li class=""><a href="/#/">Home <span class="sr-only">(current)</span></a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#" data-toggle="modal" data-target="#logInModal">Log In</a></li>
+                        <li><a href="/#/login" data-toggle="modal" data-target="#logInModal">Log In</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 More<span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
-                                <li id="signUpButton"><a href="#">Sign Up</a></li>
-                                <li id="contactUsButton"><a href="#">Contact Us</a></li>
+                                <li id="signUpButton"><a href="#">Create Account</a></li>
+                                <li id="contactUsButton"><a href="/#/contact">Contact Us</a></li>
                                 <li class="divider"></li>
                                 <li><a href="http://greenjam94.me">Greenjam94.me</a></li>
                             </ul>
@@ -61,6 +58,10 @@
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
+
+        <div class="alert alert-warning" role="alert">
+            While site is under development: All data is hardcoded, mocked, and not from a database
+        </div>
 
         <data-ng-view></data-ng-view>
 

@@ -1,4 +1,4 @@
-skillup.controller("LoginCtrl", ["$scope", "$http", function ($scope, $http) {
+cogss.controller("LoginCtrl", ["$scope", "$http", function ($scope, $http) {
     "use strict";
 
     var login = this;
@@ -9,7 +9,7 @@ skillup.controller("LoginCtrl", ["$scope", "$http", function ($scope, $http) {
         console.log("login!");
 
         $http.post("/login", login.user).then(function(res){
-            window.location.href = "#/home";
+            window.location.href = "../meets";
         }, function(){
             alert("login failed");
         });

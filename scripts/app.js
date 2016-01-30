@@ -1,20 +1,35 @@
-var skillup = angular.module('skill-up-ng-app', ['ngRoute']);
+var cogss = angular.module('skill-up-ng-app', ['ngRoute']);
 
-skillup.config(['$routeProvider',
+cogss.config(['$routeProvider',
     function($routeProvider) {
-        $routeProvider.when("/login", {
-            templateUrl: "/login/login.html"
-        }).when("/home", {
-                templateUrl: "/home/home.html"
-            }).otherwise({
-                redirectTo: "/login"
+        $routeProvider
+            .when("/", {
+                templateUrl: "/meets/meets.html"
+            })
+
+            .when("/help", {
+                templateUrl: "/help/help.html"
+            })
+
+            .when("/meets", {
+                templateUrl: "/meets/meets.html"
+            })
+
+            .when("/members", {
+                templateUrl: "/members/members.html"
+            })
+
+            .when("/login", {
+                templateUrl: "/login/login.html"
+            })
+
+            .when("/teams", {
+                templateUrl: "/teams/teams.html"
             });
     }
 ]);
 
-skillup.controller("MainCtrl", ["$scope", "$http", function ($scope, $http) {
+cogss.controller("MainCtrl", ["$scope", "$http", function ($scope, $http) {
     "use strict";
-
     var main = this;
-
 }]);

@@ -4,19 +4,19 @@ var bodyParser = require("body-parser");
 var _ = require('lodash');
 
 var app = express();
-var teams = require('./routers/teams.js');
-var login = require('./routers/login.js');
 
 var users = [
     {
+        //ToDo: Pull users from database
         username: "emu",
         password: "eagles",
-        name: "Admin",
+        name: "Admin"
     }
 ];
 var authenticatedUser;
 
 /*
+//ToDo: Enable MySQL database
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
     host     : '',
@@ -36,32 +36,10 @@ connection.connect(function(err) {
 
 app.use(express.static(__dirname));
 app.use(bodyParser.json());
-app.use('/teams', teams);
-app.use('/login', login); app.use('/logout', login);
 
+//Simple heartbeat api to test the server is live
 app.get("/heartbeat", function (req, res) {
     res.status(200).send({heartbeat: 'Still alive'});
-});
-
-app.get("/users/current", function (req, res) {
-    if (authenticatedUser) {
-        res.status(200).send(authenticatedUser);
-    } else {
-        res.status(404).send();
-    }
-});
-
-app.post("/users/current/games", function (req, res) {
-    var game = req.body;
-
-    if (!game || !game.title) {
-        res.status(422).send();
-    } else if (authenticatedUser) {
-        authenticatedUser.games.push(game);
-        res.status(200).send();
-    } else {
-        res.status(401).send();
-    }
 });
 
 app.listen(port);

@@ -1,0 +1,70 @@
+<div id="help" data-ng-controller="HelpCtrl as help">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Why do I need an account?</h3>
+                </div>
+                <div class="panel-body">
+                    <p>The reason this site uses account is because it allows us to track who added what data. Only the
+                        host of a meet can modify the data, this will ensure other gymnasts will not be able to cheat.
+                        By creating an account, you provide us with a means to authenticate who is doing what in the
+                        application. Your data will not be used or sold to third parties. Account information (name and)
+                        email is only used for authentication and logging.</p>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Thank you!</h3>
+                </div>
+                <div class="panel-body">
+                    <p>This site is still under developement, please use at your own risk and do not hesitate to contact
+                        me if your data has been modified by someone else or you need help using this website.</p>
+                    <p> Thank you for visiting this site, I hope you're enjoying it and it has made scoring easy!<br>
+                        If that's not the case, and you have any questions about the site, please email me at
+                        <a href="mailto:greenjam94@gmail.com?Subject=COGSS%20question" >Greenjam94@gmail.com</a></p>
+                </div>
+                <div class="panel-footer">
+                    <p> If you want to donate to keep this site in use, please do by contacting the webmaster above</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="panel panel-default" id="contactForm">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Any Questions?</h3>
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <label for="name">Name:</label>
+                                <input type="text" class="form-control" id="name" name="name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <label for="email">Email:</label>
+                                <input type="text" class="form-control" id="email" name="email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-12">
+                                <label for="comment">Comment / Question:</label>
+                                <textarea class="form-control" rows="5" id="comment" name="comment"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-offset-2">
+                                <!-- ToDo: submit data-ng-click-->
+                                <button type="submit" class="btn btn-primary">Send form</button>
+                                <button type="reset" class="btn btn-default">cancel</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
