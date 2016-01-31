@@ -7,14 +7,6 @@ cogss.config(['$routeProvider',
                 templateUrl: "/meets/meets.html"
             })
 
-            .when("/:mid", {
-                templateUrl: "/teams/teams.html"
-            })
-
-            .when("/:mid/:tim", {
-                templateUrl: "/members/members.html"
-            })
-
             .when("/help", {
                 templateUrl: "/help/help.html"
             })
@@ -22,6 +14,14 @@ cogss.config(['$routeProvider',
 
             .when("/login", {
                 templateUrl: "/login/login.html"
+            })
+
+            .when("/:mid", {
+                templateUrl: "/teams/teams.html"
+            })
+
+            .when("/:mid/:tim", {
+                templateUrl: "/members/members.html"
             });
     }
 ]);
