@@ -1,4 +1,4 @@
-var cogss = angular.module('skill-up-ng-app', ['ngRoute']);
+var cogss = angular.module('cogss-ng-app', ['ngRoute']);
 
 cogss.config(['$routeProvider',
     function($routeProvider) {

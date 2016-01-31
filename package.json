@@ -1,18 +1,18 @@
 {
-    "name": "skill-up-2015-grunt-package",
-    "version": "0.0.01",
+    "name": "cogss-grunt-package",
+    "version": "0.0.2",
     "private": true,
-    "description": "Skill Up 2015 Grunt Package",
+    "description": "Collegiate Online Gymnastics Scoring System (COGSS) Grunt Package",
     "main": "index.html",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "author": "Rich McLaughlin (RichMcL) & Kevin McGinty (atomicframeworks)",
+    "author": "James Green",
     "repository": {
         "type": "git",
-        "url": "https://github.com/RichMcL/skill-up-2015"
+        "url": "https://github.com/Greenjam94/COGSS"
     },
-    "license": "BSD-2-Clause",
+    "license": "",
     "devDependencies": {
         "angular": "1.4.0",
         "angular-route": "1.4.0",
