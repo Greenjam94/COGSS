@@ -10,7 +10,7 @@
     <script type="text/javascript" src="/node_modules/angular-route/angular-route.min.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
     <script type="text/javascript" src="/login/login.js"></script>
-    <script type="text/javascript" src="/meets/meets.js"></script>
+    <script type="text/javascript" src="/home/home.js"></script>
 </head>
 <body data-ng-controller="MainCtrl as main">
     <div class="container">
@@ -59,17 +59,19 @@
             </div><!-- /.container-fluid -->
         </nav>
 
-        <div class="alert alert-warning" role="alert">
-            While site is under development: All data is hardcoded, mocked, and not from a database
-        </div>
-
         <data-ng-view></data-ng-view>
 
-    </div>
 
-    <div align=center>
-        <p style="clear:both;"><small>This website was created and hosted by James Green for your use!<br>
-            See the source at <a href="https://github.com/Greenjam94/COGSS">Github</a></small></p>
+        <div class="footer">
+            <hr>
+            <div align=center>
+                <div class="alert alert-warning" role="alert">
+                    While site is under development: All data is hardcoded, mocked, and not from a database
+                </div>
+                <p style="clear:both;"><small>This website was created and hosted by James Green for your use!<br>
+                    See the source at <a href="https://github.com/Greenjam94/COGSS">Github</a></small></p>
+            </div>
+        </div>
     </div>
 
 </body>

@@ -9,7 +9,7 @@ cogss.controller("LoginCtrl", ["$scope", "$http", function ($scope, $http) {
         console.log("login!");
 
         $http.post("/login", login.user).then(function(res){
-            window.location.href = "../meets";
+            window.location.href = "../home";
         }, function(){
             alert("login failed");
         });
