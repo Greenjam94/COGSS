@@ -36,14 +36,14 @@
                         <li class=""><a href="/#/">Home <span class="sr-only">(current)</span></a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="/#/login" data-toggle="modal" data-target="#logInModal">Log In</a></li>
+                        <li><a href="#/" data-toggle="modal" data-target="#myModal">Log In</a></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 More<span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
                                 <li id="signUpButton"><a href="#">Create Account</a></li>
-                                <li id="contactUsButton"><a href="/#/contact">Contact Us</a></li>
+                                <li id="contactUsButton"><a href="/#/help">COGSS Help</a></li>
                                 <li class="divider"></li>
                                 <li><a href="http://greenjam94.me">Greenjam94.me</a></li>
                             </ul>
@@ -58,6 +58,39 @@
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
+
+        <!-- Login modal-->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Please login</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <div class="col-lg-12">
+                                    <label for="email">Email:</label>
+                                    <input type="text" class="form-control" id="email" name="email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-12">
+                                    <label for="password">Password:</label>
+                                    <input type="password" class="form-control" id="password" name="password">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-offset-2">
+                                    <button data-ng-click="login.submit()" class="btn btn-primary">Login</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <data-ng-view></data-ng-view>
 

@@ -12,4 +12,14 @@ cogss.controller("HomeCtrl", ["$scope", "$http", function ($scope, $http) {
             }
         });
     };
+
+    home.submit = function(){
+        console.log("login!");
+
+        $http.post("/login", home.user).then(function(res){
+            window.location.href = "#/";
+        }, function(){
+            alert("login failed");
+        });
+    }
 }]);
