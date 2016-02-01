@@ -3,6 +3,7 @@ var cogss = angular.module('cogss-ng-app', ['ngRoute']);
 cogss.config(['$routeProvider',
     function($routeProvider) {
         $routeProvider
+            //ToDo: Complete routing for views inside views
             .when("/", {
                 templateUrl: "/home/home.html"
             })
