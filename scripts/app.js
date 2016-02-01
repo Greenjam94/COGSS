@@ -21,10 +21,6 @@ cogss.config(['$routeProvider',
 
             .when("/:mid/settings", {
                 templateUrl: "/meet/settings.html"
-            })
-
-            .when("/:mid/:tim", {
-                templateUrl: "/gymnast/gymasts.html"
             });
     }
 ]);
