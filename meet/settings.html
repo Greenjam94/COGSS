@@ -18,14 +18,49 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Meet Settings</div>
                 <div class="panel-body">
-                    <ul>
-                        <li>Name: Michigan Madness</li>
-                        <li>Host: EMU</li>
-                        <li>Location: Ypsi, MI</li>
-                        <li>Date: March</li>
-                        <li>Creator: James</li>
-                        <li>Public: True</li>
-                    </ul>
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group col-lg-12">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="name-addon">Meet Name</span>
+                                <input type="text" class="form-control" placeholder="Michigan Madness" aria-describedby="name-addon">
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="host-addon">Hosting School</span>
+                                <input type="text" class="form-control" placeholder="EMU" aria-describedby="host-addon">
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="location-addon">Location</span>
+                                <input type="text" class="form-control" placeholder="Ypsi, MI" aria-describedby="location-addon">
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="date-addon">Event Date</span>
+                                <input type="text" class="form-control" placeholder="March" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="creator-addon">Creator</span>
+                                <input type="text" class="form-control" placeholder="James" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-12"  align="center">
+                            <div class="input-group">
+                                <label class="radio-inline"><input type="radio" name="public">Public</label>
+                                <label class="radio-inline"><input type="radio" name="private">Private</label>
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-12" align="center">
+                            <!-- ToDo: submit data-ng-click-->
+                            <button type="submit" class="btn btn-primary">Send form</button>
+                            <button type="reset" class="btn btn-default">cancel</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -37,24 +72,26 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th>User ID</th>
                             <th>Name</th>
+                            <th>Email</th>
                             <th>Remove</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <td>1</td>
-                            <td>admin</td>
+                            <td>Admin</td>
+                            <td>admin@cogss.com</td>
                         </tr>
                         <tr>
-                            <td>6</td>
                             <td>James (meet creator)</td>
+                            <td>greenjam94@gmail.com</td>
                         </tr>
                         <tr>
-                            <td>37</td>
                             <td>John Doe (added 1/29/16)</td>
-                            <td><a class="close">x</a></td>
+                            <td>John.Doe@fake.com</td>
+                            <td><button type="button" class="btn btn-sm btn-danger">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button></td>
                         </tr>
                         </tbody>
                     </table>
