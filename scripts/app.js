@@ -24,11 +24,6 @@ cogss.config(['$routeProvider',
                 controller: "MeetCtrl"
             })
 
-            .when("/:meetId", {
-                templateUrl: "/meet/teams.html",
-                controller: "MeetCtrl"
-            })
-
             .when("/:meetId/settings", {
                 templateUrl: "/meet/settings.html",
                 controller: "MeetCtrl"
