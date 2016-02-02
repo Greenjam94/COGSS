@@ -5,23 +5,23 @@ cogss.config(['$routeProvider',
         $routeProvider
             //ToDo: Complete routing for views inside views
             .when("/", {
-                templateUrl: "/home/home.html"
+                templateUrl: "/home/home.html",
+                controller: "HomeCtrl"
             })
 
             .when("/help", {
-                templateUrl: "/help/help.html"
+                templateUrl: "/help/help.html",
+                controller: "HelpCtrl"
             })
 
-            .when("/login", {
-                templateUrl: "/login/login.html"
+            .when("/:meetId", {
+                templateUrl: "/meet/meet.html",
+                controller: "MeetCtrl"
             })
 
-            .when("/:mid", {
-                templateUrl: "/meet/meet.html"
-            })
-
-            .when("/:mid/settings", {
-                templateUrl: "/meet/settings.html"
+            .when("/:meetId/settings", {
+                templateUrl: "/meet/settings.html",
+                controller: "MeetCtrl"
             });
     }
 ]);
