@@ -11,7 +11,7 @@ cogss.controller("MeetCtrl", ["$scope", "$http", function ($scope, $http) {
     meet.logout = function(){
         $http.post("/logout").then(function(res){
             if (res.status === 200) {
-                window.location.href  = "#/login";
+                window.location.href  = "#/";
             } else {
                 console.log("Error on logout", res);
             }

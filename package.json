@@ -14,9 +14,11 @@
     },
     "license": "",
     "devDependencies": {
-        "angular": "1.4.0",
+        "angular": "1.4.4",
+        "angular-animate": "1.4.6",
         "angular-route": "1.4.0",
-        "bootstrap": "3.3.4",
+        "angular-ui-bootstrap": "*",
+        "bootstrap": "3.3.6",
         "express": "4.x",
         "lodash": "*",
         "matchdep": "*",
