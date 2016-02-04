@@ -22,31 +22,31 @@
                         <div class="form-group col-lg-12">
                             <div class="input-group">
                                 <span class="input-group-addon" id="name-addon">Meet Name</span>
-                                <input type="text" class="form-control" value="Michigan Madness" aria-describedby="name-addon">
+                                <input type="text" class="form-control" value="{{meet.info.name}}" aria-describedby="name-addon">
                             </div>
                         </div>
                         <div class="form-group col-lg-12">
                             <div class="input-group">
                                 <span class="input-group-addon" id="host-addon">Hosting School</span>
-                                <input type="text" class="form-control" value="EMU" aria-describedby="host-addon">
+                                <input type="text" class="form-control" value="{{meet.info.host}}" aria-describedby="host-addon">
                             </div>
                         </div>
                         <div class="form-group col-lg-12">
                             <div class="input-group">
                                 <span class="input-group-addon" id="location-addon">Location</span>
-                                <input type="text" class="form-control" value="Ypsi, MI" aria-describedby="location-addon">
+                                <input type="text" class="form-control" value="{{meet.info.loco}}" aria-describedby="location-addon">
                             </div>
                         </div>
                         <div class="form-group col-lg-12">
                             <div class="input-group">
                                 <span class="input-group-addon" id="date-addon">Event Date</span>
-                                <input type="text" class="form-control" value="March" aria-describedby="basic-addon1">
+                                <input type="text" class="form-control" value="{{meet.info.date}}" aria-describedby="basic-addon1">
                             </div>
                         </div>
                         <div class="form-group col-lg-12">
                             <div class="input-group">
                                 <span class="input-group-addon" id="creator-addon">Creator</span>
-                                <input type="text" class="form-control" value="James" aria-describedby="basic-addon1">
+                                <input type="text" class="form-control" value="{{meet.creator}}" aria-describedby="basic-addon1">
                             </div>
                         </div>
                         <div class="form-group col-lg-12"  align="center">
@@ -71,28 +71,35 @@
                 <div class="panel-body">
                     <table class="table">
                         <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Remove</th>
-                        </tr>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Remove</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>Admin</td>
-                            <td>admin@cogss.com</td>
-                        </tr>
-                        <tr>
-                            <td>James (meet creator)</td>
-                            <td>greenjam94@gmail.com</td>
-                        </tr>
-                        <tr>
-                            <td>John Doe (added 1/29/16)</td>
-                            <td>John.Doe@fake.com</td>
-                            <td><button type="button" class="btn btn-sm btn-danger">
-                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                            </button></td>
-                        </tr>
+                            <tr>
+                                <td>{{meet.users[0].name}}</td>
+                                <td>{{meet.users[0].email}}</td>
+                            </tr>
+                            <tr>
+                                <td>{{meet.users[1].name}} (creator)</td>
+                                <td>{{meet.users[1].email}}</td>
+                            </tr>
+                            <tr>
+                                <td>{{meet.users[2].name}}</td>
+                                <td>{{meet.users[2].email}}</td>
+                                <td><button type="button" class="btn btn-sm btn-danger">
+                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                </button></td>
+                            </tr>
+                            <tr>
+                                <td>{{meet.users[3].name}}</td>
+                                <td>{{meet.users[3].email}}</td>
+                                <td><button type="button" class="btn btn-sm btn-danger">
+                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                </button></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

@@ -35,7 +35,7 @@ cogss.controller("MainCtrl", ["$scope", "$http", function ($scope, $http) {
     "use strict";
     var main = this;
 
-    //Test Modal
+    /*Test Modal
     $scope.items = ['item1', 'item2', 'item3'];
     $scope.animationsEnabled = true;
     $scope.open = function (size) {
@@ -58,5 +58,5 @@ cogss.controller("MainCtrl", ["$scope", "$http", function ($scope, $http) {
     };
     $scope.toggleAnimation = function () {
         $scope.animationsEnabled = !$scope.animationsEnabled;
-    };
+    };*/
 }]);

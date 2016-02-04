@@ -21,28 +21,28 @@
                 <div class="panel-body">
                     <table class="table">
                         <thead>
-                        <tr>
-                            <th>Rank</th>
-                            <th>Name</th>
-                            <th>Score</th>
-                        </tr>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Name</th>
+                                <th>Score</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr class="clickable-row active">
-                            <td>1</td>
-                            <td>Eagles Women A</td>
-                            <td>9.9</td>
-                        </tr>
-                        <tr class="clickable-row">
-                            <td>2</td>
-                            <td>Spartans Women A</td>
-                            <td>9.7</td>
-                        </tr>
-                        <tr class="clickable-row">
-                            <td>3</td>
-                            <td>Eagles Women B</td>
-                            <td>9.6</td>
-                        </tr>
+                            <tr class="clickable-row active">
+                                <td>{{meet.womenTeams[0].rank}}</td>
+                                <td>{{meet.womenTeams[0].name}}</td>
+                                <td>{{meet.womenTeams[0].score}}</td>
+                            </tr>
+                            <tr class="clickable-row">
+                                <td>{{meet.womenTeams[1].rank}}</td>
+                                <td>{{meet.womenTeams[1].name}}</td>
+                                <td>{{meet.womenTeams[1].score}}</td>
+                            </tr>
+                            <tr class="clickable-row">
+                                <td>{{meet.womenTeams[2].rank}}</td>
+                                <td>{{meet.womenTeams[2].name}}</td>
+                                <td>{{meet.womenTeams[2].score}}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -54,28 +54,28 @@
                 <div class="panel-body">
                     <table class="table">
                         <thead>
-                        <tr>
-                            <th>Rank</th>
-                            <th>Name</th>
-                            <th>Score</th>
-                        </tr>
+                            <tr>
+                                <th>Rank</th>
+                                <th>Name</th>
+                                <th>Score</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr class="clickable-row">
-                            <td>1</td>
-                            <td>Spartans Men A</td>
-                            <td>43.55</td>
-                        </tr>
-                        <tr class="clickable-row">
-                            <td>2</td>
-                            <td>Spartans Men B</td>
-                            <td>41.11</td>
-                        </tr>
-                        <tr class="clickable-row">
-                            <td>3</td>
-                            <td>Eagles Men B</td>
-                            <td>36.77</td>
-                        </tr>
+                            <tr class="clickable-row">
+                                <td>{{meet.menTeams[0].rank}}</td>
+                                <td>{{meet.menTeams[0].name}}</td>
+                                <td>{{meet.menTeams[0].score}}</td>
+                            </tr>
+                            <tr class="clickable-row">
+                                <td>{{meet.menTeams[1].rank}}</td>
+                                <td>{{meet.menTeams[1].name}}</td>
+                                <td>{{meet.menTeams[1].score}}</td>
+                            </tr>
+                            <tr class="clickable-row">
+                                <td>{{meet.menTeams[2].rank}}</td>
+                                <td>{{meet.menTeams[2].name}}</td>
+                                <td>{{meet.menTeams[2].score}}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -99,42 +99,51 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Rachel White</td>
-                    <td>9.9</td>
-                    <td>9.7</td>
-                    <td>9.9</td>
-                    <td>10</td>
-                    <td>10</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Jane Doe</td>
-                    <td>9.7</td>
-                    <td>9.7</td>
-                    <td>9.7</td>
-                    <td>9.7</td>
-                    <td>9.7</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Jody Smith</td>
-                    <td>9.7</td>
-                    <td>9.7</td>
-                    <td>9.6</td>
-                    <td>9.8</td>
-                    <td>9.7</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Julia Deer</td>
-                    <td>9.6</td>
-                    <td>9.5</td>
-                    <td>9.7</td>
-                    <td>9.6</td>
-                    <td>9.6</td>
-                </tr>
+                    <tr>
+                        <td>{{meet.eaglesA[0].rank}}</td>
+                        <td>{{meet.eaglesA[0].name}}</td>
+                        <td>{{meet.eaglesA[0].aa}}</td>
+                        <td>{{meet.eaglesA[0].v}}</td>
+                        <td>{{meet.eaglesA[0].b}}</td>
+                        <td>{{meet.eaglesA[0].ub}}</td>
+                        <td>{{meet.eaglesA[0].f}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{meet.eaglesA[1].rank}}</td>
+                        <td>{{meet.eaglesA[1].name}}</td>
+                        <td>{{meet.eaglesA[1].aa}}</td>
+                        <td>{{meet.eaglesA[1].v}}</td>
+                        <td>{{meet.eaglesA[1].b}}</td>
+                        <td>{{meet.eaglesA[1].ub}}</td>
+                        <td>{{meet.eaglesA[1].f}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{meet.eaglesA[2].rank}}</td>
+                        <td>{{meet.eaglesA[2].name}}</td>
+                        <td>{{meet.eaglesA[2].aa}}</td>
+                        <td>{{meet.eaglesA[2].v}}</td>
+                        <td>{{meet.eaglesA[2].b}}</td>
+                        <td>{{meet.eaglesA[2].ub}}</td>
+                        <td>{{meet.eaglesA[2].f}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{meet.eaglesA[3].rank}}</td>
+                        <td>{{meet.eaglesA[3].name}}</td>
+                        <td>{{meet.eaglesA[3].aa}}</td>
+                        <td>{{meet.eaglesA[3].v}}</td>
+                        <td>{{meet.eaglesA[3].b}}</td>
+                        <td>{{meet.eaglesA[3].ub}}</td>
+                        <td>{{meet.eaglesA[3].f}}</td>
+                    </tr>
+                    <tr>
+                        <td>{{meet.eaglesA[4].rank}}</td>
+                        <td>{{meet.eaglesA[4].name}}</td>
+                        <td>{{meet.eaglesA[4].aa}}</td>
+                        <td>{{meet.eaglesA[4].v}}</td>
+                        <td>{{meet.eaglesA[4].b}}</td>
+                        <td>{{meet.eaglesA[4].ub}}</td>
+                        <td>{{meet.eaglesA[4].f}}</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
