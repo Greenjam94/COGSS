@@ -5,16 +5,6 @@ var _ = require('lodash');
 
 var app = express();
 
-var users = [
-    {
-        //ToDo: Pull users from database
-        username: "emu",
-        password: "eagles",
-        name: "Admin"
-    }
-];
-var authenticatedUser;
-
 /*
 //ToDo: Enable MySQL database
 var mysql      = require('mysql');
