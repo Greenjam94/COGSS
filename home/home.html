@@ -12,23 +12,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><a href="#/1/teams">{{home.meets[0].name}}</a></td>
-                        <td>{{home.meets[0].host}}</td>
-                        <td>{{home.meets[0].loco}}</td>
-                        <td>{{home.meets[0].date}}</td>
-                    </tr>
-                    <tr>
-                        <td>{{home.meets[1].name}}</td>
-                        <td>{{home.meets[1].host}}</td>
-                        <td>{{home.meets[1].loco}}</td>
-                        <td>{{home.meets[1].date}}</td>
-                    </tr>
-                    <tr>
-                        <td>{{home.meets[2].name}}</td>
-                        <td>{{home.meets[2].host}}</td>
-                        <td>{{home.meets[2].loco}}</td>
-                        <td>{{home.meets[2].date}}</td>
+                    <tr ng-repeat="meet in home.meets">
+                        <td><a href="#/1/teams">{{meet.name}}</a></td>
+                        <td>{{meet.host}}</td>
+                        <td>{{meet.loco}}</td>
+                        <td>{{meet.date}}</td>
                     </tr>
                 </tbody>
             </table>
