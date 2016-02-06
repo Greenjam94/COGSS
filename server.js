@@ -3,7 +3,7 @@ var express    = require('express');
 var bodyParser = require("body-parser");
 var mysql      = require('mysql');
 //ToDo:Do we need lodah?
-var _ = require('lodash');
+//var _ = require('lodash');
 
 var app = express();
 

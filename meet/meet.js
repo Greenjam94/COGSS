@@ -1,14 +1,13 @@
 /**
  * Created by james on 1/29/16.
  */
-cogss.controller("MeetCtrl", ["$scope", "$http", function ($scope, $http) {
+cogss.controller("MeetCtrl", ["$scope", "$http", "$routeParams", function ($scope, $http, $routeParams) {
     "use strict";
 
     var meet = this;
 
-    //ToDo: Get from page, shouldn't be hardcoded.
-    var meetID = "1";
-    var teamID = "3";
+    var meetID = $routeParams.meetId;
+    var teamID = meetID == 1 ? '3' : '2'; //ToDo: Get from teams page, clickable tables in first row
 
     meet.info = {};
     meet.selectedTeam = {};
@@ -34,8 +33,22 @@ cogss.controller("MeetCtrl", ["$scope", "$http", function ($scope, $http) {
 
     $http.get("/users/"+meetID).then(function(res) {
         meet.users = res.data;
-        console.log(meet.users);
     });
+
+    $scope.gymnast = {
+        //ToDo: Set these values from the API so they can be updated
+        //ToDo: Multiple gymnasts?...
+        wVault:0,
+        wBars:0,
+        wBeam:0,
+        wFloor:0
+    };
+
+    $scope.updateGymnast = function () {
+        console.log('Attempt to update gymnast');
+        //why is it after every keypress? Should be on input leave or return key
+        // https://docs.angularjs.org/api/ng/directive/ngChange
+    };
 
     /*
     meet.logout = function(){

@@ -96,12 +96,28 @@
                     <!-- ToDo: What if it's a mens team? change the table?-->
                     <tr ng-repeat="gymnast in meet.selectedTeam">
                         <td>#</td>
-                        <td>{{gymnast.first}} {{gymnast.last}}</td>
+                        <td>{{gymnast.first}} {{gymnast.last}}<input type="hidden" title="gymnastID" value="{{gymnast.gymnastID}}"></td>
                         <td>{{gymnast.score}}</td>
-                        <td>{{gymnast.wVault}}</td>
-                        <td>{{gymnast.wBars}}</td>
-                        <td>{{gymnast.wBeam}}</td>
-                        <td>{{gymnast.wFloor}}</td>
+                        <td>
+                            <input class="eventScore"
+                                   title="wVault" value="{{gymnast.wVault}}"
+                                   ng-model="gymnast.wVault" ng-change="updateGymnast()">
+                        </td>
+                        <td>
+                            <input class="eventScore"
+                                   title="wBars" value="{{gymnast.wBars}}"
+                                   ng-model="gymnast.wBars" ng-change="updateGymnast()">
+                        </td>
+                        <td>
+                            <input class="eventScore"
+                                   title="wBeam" value="{{gymnast.wBeam}}"
+                                   ng-model="gymnast.wBeam" ng-change="updateGymnast()">
+                        </td>
+                        <td>
+                            <input class="eventScore"
+                                   title="wFloor" value="{{gymnast.wFloor}}"
+                                   ng-model="gymnast.wFloor" ng-change="updateGymnast()">
+                        </td>
                     </tr>
                 </tbody>
             </table>
