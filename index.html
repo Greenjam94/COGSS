@@ -55,7 +55,26 @@
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Search">
                         </div>
-                        <button type="submit" class="btn btn-default">Submit</button>
+                        <!-- Split button -->
+                        <div class="btn-group">
+                            <button type="button"
+                                    class="btn btn-default dropdown-toggle"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                Context
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">All Meets</a></li>
+                                <li><a href="#">All Teams</a></li>
+                                <li><a href="#">All Gymnasts</a></li>
+                                <li><a href="#">All Users</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Current Meet</a></li>
+                                <li><a href="#">Current Team</a></li>
+                            </ul>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->

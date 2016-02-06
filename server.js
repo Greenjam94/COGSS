@@ -8,9 +8,9 @@ var _ = require('lodash');
 var app = express();
 
 var connection = mysql.createConnection({
-    host     : '',
-    user     : '',
-    password : '',
+    host     : '104.131.28.32',
+    user     : 'james',
+    password : 'SPARTAN1216sql',
     database : 'cogss'
 });
 
