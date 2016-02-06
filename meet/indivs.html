@@ -25,20 +25,20 @@
                             <th>Name</th>
                             <th>AA</th>
                             <th>Vault</th>
-                            <th>Beam</th>
                             <th>Bars</th>
+                            <th>Beam</th>
                             <th>Floor</th>
                         </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="gymnast in meet.women">
                                 <td>#</td>
-                                <td>{{gymnast.name}}</td>
-                                <td>{{gymnast.aa}}</td>
-                                <td>{{gymnast.v}}</td>
-                                <td>{{gymnast.b}}</td>
-                                <td>{{gymnast.ub}}</td>
-                                <td>{{gymnast.f}}</td>
+                                <td>{{gymnast.first}} {{gymnast.last}}</td>
+                                <td>{{gymnast.score}}</td>
+                                <td>{{gymnast.wVault}}</td>
+                                <td>{{gymnast.wBars}}</td>
+                                <td>{{gymnast.wBeam}}</td>
+                                <td>{{gymnast.wFloor}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -56,10 +56,10 @@
                             <th>Rank</th>
                             <th>Name</th>
                             <th>AA</th>
-                            <th>Vault</th>
                             <th>Floor</th>
                             <th>Pommel</th>
                             <th>Rings</th>
+                            <th>Vault</th>
                             <th>P Bars</th>
                             <th>High Bar</th>
                         </tr>
@@ -67,14 +67,14 @@
                         <tbody>
                             <tr ng-repeat="gymnast in meet.men">
                                 <td>#</td>
-                                <td>{{gymnast.name}}</td>
-                                <td>{{gymnast.aa}}</td>
-                                <td>{{gymnast.v}}</td>
-                                <td>{{gymnast.f}}</td>
-                                <td>{{gymnast.p}}</td>
-                                <td>{{gymnast.r}}</td>
-                                <td>{{gymnast.pb}}</td>
-                                <td>{{gymnast.hb}}</td>
+                                <td>{{gymnast.first}} {{gymnast.last}}</td>
+                                <td>{{gymnast.score}}</td>
+                                <td>{{gymnast.mFloor}}</td>
+                                <td>{{gymnast.mPommel}}</td>
+                                <td>{{gymnast.mRings}}</td>
+                                <td>{{gymnast.mVault}}</td>
+                                <td>{{gymnast.mParallel}}</td>
+                                <td>{{gymnast.mHigh}}</td>
                             </tr>
                         </tbody>
                     </table>

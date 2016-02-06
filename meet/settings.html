@@ -22,25 +22,25 @@
                         <div class="form-group col-lg-12">
                             <div class="input-group">
                                 <span class="input-group-addon" id="name-addon">Meet Name</span>
-                                <input title="name" type="text" class="form-control" value="{{meet.info.name}}" aria-describedby="name-addon">
+                                <input title="name" type="text" class="form-control" value="{{meet.info.info[0].name}}" aria-describedby="name-addon">
                             </div>
                         </div>
                         <div class="form-group col-lg-12">
                             <div class="input-group">
                                 <span class="input-group-addon" id="host-addon">Hosting School</span>
-                                <input title="host" type="text" class="form-control" value="{{meet.info.host}}" aria-describedby="host-addon">
+                                <input title="host" type="text" class="form-control" value="{{meet.info.info[0].host}}" aria-describedby="host-addon">
                             </div>
                         </div>
                         <div class="form-group col-lg-12">
                             <div class="input-group">
                                 <span class="input-group-addon" id="location-addon">Location</span>
-                                <input title="location" type="text" class="form-control" value="{{meet.info.loco}}" aria-describedby="location-addon">
+                                <input title="location" type="text" class="form-control" value="{{meet.info.info[0].location}}" aria-describedby="location-addon">
                             </div>
                         </div>
                         <div class="form-group col-lg-12">
                             <div class="input-group">
                                 <span class="input-group-addon" id="date-addon">Event Date</span>
-                                <input title="date" type="text" class="form-control" value="{{meet.info.date}}" aria-describedby="basic-addon1">
+                                <input title="date" type="text" class="form-control" value="{{meet.info.info[0].date}}" aria-describedby="basic-addon1">
                             </div>
                         </div>
                         <div class="form-group col-lg-12"  align="center">
@@ -72,25 +72,25 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <!-- ToDo: repeat with conditionals, first is fine, second (creator), all others get x button-->
+                        <!-- ToDo: repeat with conditionals, hopefully first is fine, second (creator), all others get x button-->
                             <tr>
-                                <td>{{meet.info.users[0].name}}</td>
-                                <td>{{meet.info.users[0].email}}</td>
+                                <td>{{meet.users[0].first}} {{meet.users[0].last}} (Admin)</td>
+                                <td>{{meet.users[0].email}}</td>
                             </tr>
                             <tr>
-                                <td>{{meet.info.users[1].name}} (creator)</td>
-                                <td>{{meet.info.users[1].email}}</td>
+                                <td>{{meet.users[1].first}} {{meet.users[1].last}} (creator)</td>
+                                <td>{{meet.users[1].email}}</td>
                             </tr>
                             <tr>
-                                <td>{{meet.info.users[2].name}}</td>
-                                <td>{{meet.info.users[2].email}}</td>
+                                <td>{{meet.users[2].first}} {{meet.users[2].last}}</td>
+                                <td>{{meet.users[2].email}}</td>
                                 <td><button type="button" class="btn btn-sm btn-danger">
                                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                 </button></td>
                             </tr>
                             <tr>
-                                <td>{{meet.info.users[3].name}}</td>
-                                <td>{{meet.info.users[3].email}}</td>
+                                <td>{{meet.users[3].first}} {{meet.users[3].last}}</td>
+                                <td>{{meet.users[3].email}}</td>
                                 <td><button type="button" class="btn btn-sm btn-danger">
                                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                 </button></td>

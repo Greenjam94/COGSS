@@ -6,13 +6,15 @@ cogss.controller("MeetCtrl", ["$scope", "$http", function ($scope, $http) {
 
     var meet = this;
 
+    //ToDo: Get from page, shouldn't be hardcoded.
     var meetID = "1";
-    var teamID = "1";
+    var teamID = "3";
 
     meet.info = {};
     meet.selectedTeam = {};
     meet.women = {};
     meet.men = {};
+    meet.users = {};
 
     $http.get("/meets/"+meetID).then(function(res) {
         meet.info = res.data;
@@ -26,8 +28,13 @@ cogss.controller("MeetCtrl", ["$scope", "$http", function ($scope, $http) {
         meet.women = res.data;
     });
 
-    $http.get("/gymnasts/"+teamID+"/men/").then(function(res) {
+    $http.get("/gymnasts/"+meetID+"/men/").then(function(res) {
         meet.men = res.data;
+    });
+
+    $http.get("/users/"+meetID).then(function(res) {
+        meet.users = res.data;
+        console.log(meet.users);
     });
 
     /*
