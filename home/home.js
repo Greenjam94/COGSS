@@ -3,11 +3,11 @@ cogss.controller("HomeCtrl", ["$scope", "$http", function ($scope, $http) {
 
     var home = this;
 
-    home.meets = [
-        {name:"Michigan Madness", host:"EMU", loco:"Ypsi, MI", date:"March" },
-        {name:"Miami Meet", host:"MU", loco:"Miami, OH", date:"Feb 17" },
-        {name:"OSU Opps", host:"OSU", loco:"Columbus, OH", date:"Feb 5" }
-    ];
+    home.meets = {};
+
+    $http.get("/meets").then(function(res) {
+        home.meets = res.data;
+    });
 
     //home.logout = function(){
     //    $http.post("/logout").then(function(res){

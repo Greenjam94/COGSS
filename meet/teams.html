@@ -13,7 +13,6 @@
     </ul>
     <br>
 
-    <!--ToDo: Move each col to it's own file. Link to that file using ng-view and routing-->
     <div class="row">
         <div class="col-lg-6">
             <div class="panel panel-default">
@@ -29,8 +28,8 @@
                         </thead>
                         <tbody>
                             <!-- ToDo: First row must be class="clickable-row acive"-->
-                            <tr ng-repeat="wTeam in meet.womenTeams" class="clickable-row">
-                                <td>{{wTeam.rank}}</td>
+                            <tr ng-repeat="wTeam in meet.info.womensTeams" class="clickable-row">
+                                <td>#</td>
                                 <td>{{wTeam.name}}</td>
                                 <td>{{wTeam.score}}</td>
                             </tr>
@@ -52,8 +51,8 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="mTeam in meet.menTeams" class="clickable-row">
-                                <td>{{mTeam.rank}}</td>
+                            <tr ng-repeat="mTeam in meet.info.mensTeams" class="clickable-row">
+                                <td>#</td>
                                 <td>{{mTeam.name}}</td>
                                 <td>{{mTeam.score}}</td>
                             </tr>
@@ -65,7 +64,7 @@
     </div>
 
     <div class="panel panel-default">
-        <div class="panel-heading">Selected: Eagles Women A</div>
+        <div class="panel-heading">Selected: {{meet.info.womensTeams[0].name}}</div>
         <div class="panel-body">
             <table class="table">
                 <thead>
@@ -80,7 +79,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="gymnast in meet.eaglesA">
+                    <tr ng-repeat="gymnast in meet.selectedTeam">
                         <td>{{gymnast.rank}}</td>
                         <td>{{gymnast.name}}</td>
                         <td>{{gymnast.aa}}</td>
