@@ -8,10 +8,10 @@ var mysql      = require('mysql');
 var app = express();
 
 var connection = mysql.createConnection({
-    host     : '104.131.28.32',
-    user     : 'james',
-    password : 'SPARTAN1216sql',
-    database : 'cogss'
+    host     : '',
+    user     : '',
+    password : '',
+    database : ''
 });
 
 connection.connect(function(err) {
@@ -33,7 +33,7 @@ app.get("/heartbeat", function (req, res) {
 //API
 app.get("/meets", function (req, res) {
     connection.query(
-        'SELECT * FROM meets',
+        'SELECT * FROM meets', //ToDo: WHERE public = 1 or <Logged in user has access to>
         function(err,rows) {
             if (err) throw err;
             res.status(200).send(rows);
@@ -42,6 +42,7 @@ app.get("/meets", function (req, res) {
 
 app.get("/meets/:meetID", function (req, res) {
     connection.query(
+        //ToDo: If logged in user has access to requested meet, then do this
         'SELECT * FROM meets WHERE meetID = '+connection.escape(req.params.meetID),
         function(err,rows) {
             var mymeet = {info:[], womensTeams:[], mensTeams:[]};
