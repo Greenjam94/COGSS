@@ -35,104 +35,80 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class=""><a href="/#/">Home <span class="sr-only">(current)</span></a></li>
+                        <li class=""><a href="/#/">Home</a></li>
                     </ul>
+
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#/" data-toggle="modal" data-target="#myModal">Log In</a></li>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                More<span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li id="signUpButton"><a href="#">Create Account</a></li>
-                                <li id="contactUsButton"><a href="/#/help">COGSS Help</a></li>
-                                <li class="divider"></li>
-                                <li><a href="http://greenjam94.me">Greenjam94.me</a></li>
-                            </ul>
+
+                        <li><a href="#/" data-toggle="modal" ng-click="openLoginModal('lg')"> Log In</a></li>
+
+                        <li>
+                            <div class="btn-group" uib-dropdown is-open="status.isopen">
+                                <button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle ng-disabled="disabled">
+                                    More <span class="caret"></span>
+                                </button>
+                                <ul uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                                    <li role="menuitem"><a href="#">Create Account</a></li>
+                                    <li role="menuitem"><a href="/#/help">COGSS Help</a></li>
+                                    <li class="divider"></li>
+                                    <li role="menuitem"><a href="https://greenjam94.me">greenjam94.me</a></li>
+                                </ul>
+                            </div>
                         </li>
                     </ul>
-                    <form class="navbar-form navbar-right" role="search">
+
+                    <form name="searchForm" ng-controller="searchController" class="navbar-form navbar-right" role="search">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search">
+                            <input type="text" ng-model="keywords" class="form-control" placeholder="Search">
                         </div>
-                        <!-- Split button -->
-                        <div class="btn-group">
-                            <button type="button"
-                                    class="btn btn-default dropdown-toggle"
-                                    data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                Context
+                        <div class="btn-group" uib-dropdown>
+                            <button id="split-button" type="submit" class="btn btn-default">Search All</button>
+                            <button type="button" class="btn btn-default" uib-dropdown-toggle>
                                 <span class="caret"></span>
+                                <span class="sr-only">Split button!</span>
                             </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">All Meets</a></li>
-                                <li><a href="#">All Teams</a></li>
-                                <li><a href="#">All Gymnasts</a></li>
-                                <li><a href="#">All Users</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="#">Current Meet</a></li>
-                                <li><a href="#">Current Team</a></li>
+                            <ul uib-dropdown-menu role="menu" aria-labelledby="split-button">
+                                <li role="menuitem"><a href="#">Search Meets</a></li>
+                                <li role="menuitem"><a href="#">Search Teams</a></li>
+                                <li role="menuitem"><a href="#">Search Gymnasts</a></li>
                             </ul>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
+
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
 
         <!-- Login modal-->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Please login</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form class="form-horizontal" role="form">
-                            <div class="form-group">
-                                <div class="col-lg-12">
-                                    <label for="email">Email:</label>
-                                    <input type="text" class="form-control" id="email" name="email">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-lg-12">
-                                    <label for="password">Password:</label>
-                                    <input type="password" class="form-control" id="password" name="password">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-lg-offset-2">
-                                    <!--ToDo: Submit correctly-->
-                                    <button data-ng-click="login.submit()" class="btn btn-primary">Login</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Test modal -->
-        <!--<button type="button" class="btn btn-default" ng-click="open()">Open me!</button>
-        <script type="text/ng-template" id="myModalContent.html">
+        <script type="text/ng-template" id="LoginModalContent.html">
             <div class="modal-header">
-                <h3 class="modal-title">I'm a modal!</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Please login</h4>
             </div>
             <div class="modal-body">
-                <ul>
-                    <li ng-repeat="item in items">
-                        <a href="#" ng-click="$event.preventDefault(); selected.item = item">{{ item }}</a>
-                    </li>
-                </ul>
-                Selected: <b>{{ selected.item }}</b>
+                <form class="form-horizontal" role="form" name="loginForm">
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <label>Email:</label>
+                            <input type="email" class="form-control" ng-model="email" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <label>Password:</label>
+                            <input type="password" class="form-control" ng-model="password" required>
+                        </div>
+                    </div>
+                </form>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+                <button class="btn btn-primary" type="button" ng-click="ok()">Login</button>
                 <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
             </div>
-        </script> -->
+        </script>
+
+        <!-- Search msg //ToDo: Actual search functionality -->
+        {{keywords}}
 
         <data-ng-view></data-ng-view>
 
@@ -141,7 +117,7 @@
             <hr>
             <div align=center>
                 <div class="alert alert-warning" role="alert">
-                    While site is under development: All data is hardcoded, mocked, and not from a database
+                    While site is under development: Use this site at your own risk
                 </div>
                 <p style="clear:both;"><small>This website was created and hosted by James Green for your use!<br>
                     See the source at <a href="https://github.com/Greenjam94/COGSS">Github</a></small></p>

@@ -1,6 +1,7 @@
 var port = 7777;
 var express    = require('express');
 var bodyParser = require("body-parser");
+var crypto     = require('crypto');
 var mysql      = require('mysql');
 //ToDo:Do we need lodah?
 //var _ = require('lodash');
@@ -30,7 +31,34 @@ app.get("/heartbeat", function (req, res) {
     res.status(200).send({heartbeat: 'Still alive'});
 });
 
-//API
+app.post("/login", function (req, res) {
+    if (!req.body.email || !req.body.password) {
+        res.send('Email and password are both required');
+        return;
+    }
+    var hash = crypto
+        .createHash("sha256")
+        .update(req.body.password)
+        .digest('hex');
+
+    connection.query(
+        "SELECT * FROM users WHERE hash = '"+hash+"'",
+        function(err,rows) {
+            if (err) throw err;
+            console.log(hash);
+            if (rows[0]) {
+                res.status(200).send("success");
+            } else {
+                res.status(401).send("fail");
+            }
+        }
+    );
+
+    //res.status(200).send('Thanks for registering ' + req.body.email);
+});
+
+//--------------------------------------------- API ---------------------------------------------//
+//Meets
 app.get("/meets", function (req, res) {
     connection.query(
         'SELECT * FROM meets', //ToDo: WHERE public = 1 or <Logged in user has access to>
@@ -66,6 +94,7 @@ app.get("/meets/:meetID", function (req, res) {
         });
 });
 
+//Teams
 app.get("/teams/:teamID", function (req, res) {
     connection.query(
         'SELECT * FROM  gymnasts WHERE teamID = ' + connection.escape(req.params.teamID),
@@ -75,7 +104,7 @@ app.get("/teams/:teamID", function (req, res) {
         });
 });
 
-
+//Gymnasts
 app.get("/gymnasts/:meetID/women", function (req, res) {
     connection.query(
         'SELECT * FROM  gymnasts WHERE meetID = ' + connection.escape(req.params.meetID) + ' AND gender = 0',
@@ -91,9 +120,57 @@ app.get("/gymnasts/:meetID/men", function (req, res) {
         function(err,rows) {
             if (err) throw err;
             res.status(200).send(rows);
-        });
+        }
+    );
 });
 
+app.put("/gymnasts", function (req, res) {
+    //req.body.eventName, req.body.id, req.body.eventScore
+
+    //validate
+    if (req.body.eventName == undefined || req.body.id == undefined || req.body.eventScore == undefined) {
+        res.status(401).send("Poor request, a field was undefined");
+        //ToDo: Log bad request
+        return;
+    } else if (isNaN(req.body.eventScore) && !isFinite(req.body.eventScore)) {
+        res.status(401).send("Poor request, invalid score");
+        //ToDo: Log bad event score
+        return;
+    }
+
+    //send
+    connection.query(
+        'UPDATE gymnasts SET '+req.body.eventName+'='+req.body.eventScore+' WHERE gymnastID = '+req.body.id,
+        function(err,rows) {
+            if (err) throw err;
+            connection.query(
+                'SELECT wVault, wBars, wBeam, wFloor, mFloor, mPommel, mRings, mVault, mParallel, mHigh FROM gymnasts WHERE gymnastID = '+req.body.id,
+                function(err,rows) {
+                    if (err) throw err;
+                    var allAround = rows[0].wVault +
+                                    rows[0].wBars +
+                                    rows[0].wBeam +
+                                    rows[0].wFloor +
+                                    rows[0].mFloor +
+                                    rows[0].mPommel +
+                                    rows[0].mRings +
+                                    rows[0].mVault +
+                                    rows[0].mParallel +
+                                    rows[0].mHigh;
+                    connection.query(
+                        'UPDATE gymnasts SET score = '+allAround+' WHERE gymnastID = '+req.body.id,
+                        function(err, rows) {
+                            res.status(200).send(JSON.stringify(allAround));
+                        }
+                    );
+                }
+            );
+        }
+    );
+
+});
+
+//Users
 app.get("/users/:meetID", function (req, res) {
     connection.query(
         'SELECT users FROM meets WHERE meetID = '+connection.escape(req.params.meetID),

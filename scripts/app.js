@@ -31,32 +31,54 @@ cogss.config(['$routeProvider',
     }
 ]);
 
-cogss.controller("MainCtrl", ["$scope", "$http", function ($scope, $http) {
+cogss.controller("MainCtrl", ["$scope", "$uibModal", "$http", function ($scope, $uibModal, $http) {
     "use strict";
     var main = this;
 
-    /*Test Modal
-    $scope.items = ['item1', 'item2', 'item3'];
     $scope.animationsEnabled = true;
-    $scope.open = function (size) {
+
+    $scope.openLoginModal = function (size) {
         var modalInstance = $uibModal.open({
             animation: $scope.animationsEnabled,
-            templateUrl: 'myModalContent.html',
-            controller: 'ModalInstanceCtrl',
-            size: size,
-            resolve: {
-                items: function () {
-                    return $scope.items;
-                }
-            }
+            templateUrl: 'LoginModalContent.html',
+            controller: 'LoginModalInstanceCtrl',
+            size: size
         });
+
         modalInstance.result.then(function (selectedItem) {
             $scope.selected = selectedItem;
-        }, function () {
-            $log.info('Modal dismissed at: ' + new Date());
         });
     };
-    $scope.toggleAnimation = function () {
-        $scope.animationsEnabled = !$scope.animationsEnabled;
-    };*/
+}]);
+
+cogss.controller('LoginModalInstanceCtrl', function ($scope, $uibModalInstance, $http) {
+
+    $scope.email = "";
+    $scope.password = "";
+
+    $scope.ok = function () {
+        if ($scope.email == undefined) {
+            alert("Bad email");
+            return;
+        }
+        //console.log($scope.email, $scope.password);
+        var user = {email:$scope.email, password: $scope.password};
+        $http.post("/login", JSON.stringify(user)).then(function (res) {
+            if (200 == res.status) {
+                $scope.auth = "true";
+            } else {
+                $scope.auth = "false";
+            }
+        });
+        $uibModalInstance.close();
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+});
+
+//ToDo: Broken search...
+cogss.controller('searchController', ['$scope', function ($scope) {
+    $scope.keywords = 'Search';
 }]);
