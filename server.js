@@ -3,7 +3,6 @@ var express    = require('express');
 var bodyParser = require("body-parser");
 var crypto     = require('crypto');
 var mysql      = require('mysql');
-//ToDo:Do we need lodah?
 //var _ = require('lodash');
 
 var app = express();
@@ -244,6 +243,20 @@ app.get("/users/:meetID", function (req, res) {
                     res.status(200).send(rows);
                 });
         });
+});
+
+app.post("/users", function (req, res) {
+    var hash = crypto
+        .createHash("sha256")
+        .update(req.body.password)
+        .digest('hex');
+    connection.query(
+       "INSERT INTO `cogss`.`users` (`first`, `last`, `email`, `hash`) VALUES ('"+req.body.first+"', '"+req.body.last+"', '"+req.body.email+"', '"+hash+"')",
+        function(err) {
+            if (err) throw err;
+            res.status(200)
+        }
+    );
 });
 
 app.listen(port);

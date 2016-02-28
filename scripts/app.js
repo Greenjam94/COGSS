@@ -49,6 +49,19 @@ cogss.controller("MainCtrl", ["$scope", "$uibModal", "$http", function ($scope, 
             $scope.selected = selectedItem;
         });
     };
+
+    $scope.openRegisterModal = function (size) {
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'RegisterModalContent.html',
+            controller: 'RegisterModalInstanceCtrl',
+            size: size
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+            $scope.selected = selectedItem;
+        });
+    };
 }]);
 
 cogss.controller('LoginModalInstanceCtrl', function ($scope, $uibModalInstance, $http) {
@@ -70,6 +83,26 @@ cogss.controller('LoginModalInstanceCtrl', function ($scope, $uibModalInstance, 
                 $scope.auth = "false";
             }
         });
+        $uibModalInstance.close();
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+});
+
+cogss.controller('RegisterModalInstanceCtrl', function ($scope, $uibModalInstance, $http) {
+
+    $scope.firstname = "";
+    $scope.lastname = "";
+    $scope.email = "";
+    $scope.password = "";
+
+    $scope.ok = function () {
+        //Validation?
+
+        var user = {first: $scope.firstname, last: $scope.lastname, email: $scope.email, password: $scope.password};
+        $http.post("/users", JSON.stringify(user));
         $uibModalInstance.close();
     };
 

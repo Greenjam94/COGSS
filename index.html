@@ -48,7 +48,7 @@
                                     More <span class="caret"></span>
                                 </button>
                                 <ul uib-dropdown-menu role="menu" aria-labelledby="single-button">
-                                    <li role="menuitem"><a href="#">Create Account</a></li>
+                                    <li role="menuitem" ng-click="openRegisterModal()"><a>Create Account</a></li>
                                     <li role="menuitem"><a href="/#/help">COGSS Help</a></li>
                                     <li class="divider"></li>
                                     <li role="menuitem"><a href="https://greenjam94.me">greenjam94.me</a></li>
@@ -87,6 +87,48 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" role="form" name="loginForm">
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <label>Email:</label>
+                            <input type="email" class="form-control" ng-model="email" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <label>Password:</label>
+                            <input type="password" class="form-control" ng-model="password" required>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" ng-click="ok()">Login</button>
+                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+            </div>
+        </script>
+
+        <!-- Login modal-->
+        <script type="text/ng-template" id="RegisterModalContent.html">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="registerModalLabel">Please register</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" role="form" name="registerForm">
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <label>First name:</label>
+                            <input type="text" class="form-control" ng-model="firstname">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-12">
+                            <label>Last name:</label>
+                            <input type="text" class="form-control" ng-model="lastname">
+                        </div>
+                    </div>
                     <div class="form-group">
                         <div class="col-lg-12">
                             <label>Email:</label>
