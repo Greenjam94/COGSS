@@ -25,6 +25,9 @@ connection.connect(function(err) {
 app.use(express.static(__dirname));
 app.use(bodyParser.json());
 
+
+
+//--------------------------------------------- API ---------------------------------------------//
 //Simple heartbeat api to test the server is live
 app.get("/heartbeat", function (req, res) {
     res.status(200).send({heartbeat: 'Still alive'});
@@ -41,22 +44,19 @@ app.post("/login", function (req, res) {
         .digest('hex');
 
     connection.query(
-        "SELECT * FROM users WHERE hash = '"+hash+"'",
+        "SELECT * FROM users WHERE hash = '"+hash+"' AND email = '"+req.body.email+"'",
         function(err,rows) {
             if (err) throw err;
             console.log(hash);
             if (rows[0]) {
-                res.status(200).send("success");
+                res.status(200);
             } else {
-                res.status(401).send("fail");
+                res.status(401);
             }
         }
     );
-
-    //res.status(200).send('Thanks for registering ' + req.body.email);
 });
 
-//--------------------------------------------- API ---------------------------------------------//
 //Meets
 app.get("/meets", function (req, res) {
     connection.query(
@@ -72,19 +72,16 @@ app.post("/meets", function (req, res) {
     connection.query(
         'INSERT INTO cogss.meets (`name`, `host`, `location`, `date`, `public`, `createdBy`, `createdOn`) ' +
         "VALUES ('"+req.body.name+"', '"+req.body.host+"', '"+req.body.location +
-        "', '"+req.body.date+"', '"+req.body.public+"', '"+req.body.createdBy+"', '"+req.body.createdOn+"')",
+                "', '"+req.body.date+"', '"+req.body.public+"', '"+req.body.createdBy+"', '"+req.body.createdOn+"')",
         function(err) {
             if (err) throw err;
-            res.status(200).send(
-                'Added:'+req.body.name+', '+req.body.host+', '+req.body.location+', '+req.body.date+', '+req.body.public
-            );
+            res.status(200);
         }
     );
 });
 
 app.get("/meets/:meetID", function (req, res) {
     connection.query(
-        //ToDo: If logged in user has access to requested meet, then do this
         'SELECT * FROM meets WHERE meetID = '+connection.escape(req.params.meetID),
         function(err,rows) {
             var mymeet = {info:[], womensTeams:[], mensTeams:[]};
@@ -103,21 +100,25 @@ app.get("/meets/:meetID", function (req, res) {
                             if (err) throw err;
                             mymeet.mensTeams = rows;
                             res.status(200).send(mymeet);
-                        });
-                });
-        });
+                        }
+                    );
+                }
+            );
+        }
+    );
 });
 
 app.put("/meets/:meetID", function (req, res) {
     var date = new Date().toISOString().slice(0, 19).replace('T', ' ');
-   connection.query(
+
+    connection.query(
        'UPDATE meets SET ' +
        'name = "'+req.body.name+'",' +
        ' host = "'+req.body.host+'",' +
        ' location = "'+req.body.location+'",'+
        ' date = "'+req.body.date+'",'+
        ' public = '+req.body.public+','+
-       ' updatedBy = 0, ' + //ToDo: Don't hardcode user, use UserAuth
+       ' updatedBy = 0, ' +
        ' updatedOn = "'+date+'"' +
        ' WHERE meetID = '+req.params.meetID,
        function(err) {
@@ -134,12 +135,14 @@ app.get("/teams/:teamID", function (req, res) {
         function(err,rows) {
             if (err) throw err;
             res.status(200).send(rows);
-        });
+        }
+    );
 });
 
 app.post("/teams", function (req, res) {
     connection.query(
-       "INSERT INTO `cogss`.`teams` (`meetID`, `name`, `email`, `gender`) VALUES ('"+req.body.meetID+"', '"+req.body.name+"', '"+req.body.email+"', '"+req.body.gender+"')",
+       "INSERT INTO `cogss`.`teams` (`meetID`, `name`, `email`, `gender`)" +
+       " VALUES ('"+req.body.meetID+"', '"+req.body.name+"', '"+req.body.email+"', '"+req.body.gender+"')",
        function(err) {
            if (err) throw err;
            connection.query(
@@ -160,7 +163,8 @@ app.get("/gymnasts/:meetID/women", function (req, res) {
         function(err,rows) {
             if (err) throw err;
             res.status(200).send(rows);
-        });
+        }
+    );
 });
 
 app.get("/gymnasts/:meetID/men", function (req, res) {
@@ -175,7 +179,9 @@ app.get("/gymnasts/:meetID/men", function (req, res) {
 
 app.post("/gymnasts", function (req, res) {
     connection.query(
-        "INSERT INTO `cogss`.`gymnasts` (`teamID`, `meetID`, `first`, `last`, `gender`) VALUES ('"+req.body.teamID+"', '"+req.body.meetID+"', '"+req.body.firstname+"', '"+req.body.lastname+"', '"+req.body.gender+"')",
+        "INSERT INTO `cogss`.`gymnasts` (`teamID`, `meetID`, `first`, `last`, `gender`) " +
+        "VALUES ('"+req.body.teamID+"', '"+req.body.meetID+"', '"+req.body.firstname+"'," +
+                " '"+req.body.lastname+"', '"+req.body.gender+"')",
         function(err) {
             if (err) throw err;
             res.status(200)
@@ -184,7 +190,6 @@ app.post("/gymnasts", function (req, res) {
 });
 
 app.put("/gymnasts", function (req, res) {
-    //req.body.eventName, req.body.id, req.body.eventScore
 
     //validate
     if (req.body.eventName == undefined || req.body.id == undefined || req.body.eventScore == undefined) {
@@ -200,10 +205,12 @@ app.put("/gymnasts", function (req, res) {
     //send
     connection.query(
         'UPDATE gymnasts SET '+req.body.eventName+'='+req.body.eventScore+' WHERE gymnastID = '+req.body.id,
-        function(err,rows) {
+        function(err) {
             if (err) throw err;
             connection.query(
-                'SELECT wVault, wBars, wBeam, wFloor, mFloor, mPommel, mRings, mVault, mParallel, mHigh FROM gymnasts WHERE gymnastID = '+req.body.id,
+                'SELECT wVault, wBars, wBeam, wFloor, mFloor, mPommel, mRings, mVault, mParallel, mHigh' +
+                ' FROM gymnasts' +
+                ' WHERE gymnastID = '+req.body.id,
                 function(err,rows) {
                     if (err) throw err;
                     var allAround = rows[0].wVault +
@@ -218,7 +225,8 @@ app.put("/gymnasts", function (req, res) {
                                     rows[0].mHigh;
                     connection.query(
                         'UPDATE gymnasts SET score = '+allAround+' WHERE gymnastID = '+req.body.id,
-                        function(err, rows) {
+                        function(err) {
+                            if (err) throw err;
                             res.status(200).send(JSON.stringify(allAround));
                         }
                     );
@@ -226,7 +234,6 @@ app.put("/gymnasts", function (req, res) {
             );
         }
     );
-
 });
 
 //Users
@@ -241,8 +248,10 @@ app.get("/users/:meetID", function (req, res) {
                 function(err,rows) {
                     if (err) throw err;
                     res.status(200).send(rows);
-                });
-        });
+                }
+            );
+        }
+    );
 });
 
 app.post("/users", function (req, res) {
@@ -250,8 +259,10 @@ app.post("/users", function (req, res) {
         .createHash("sha256")
         .update(req.body.password)
         .digest('hex');
+
     connection.query(
-       "INSERT INTO `cogss`.`users` (`first`, `last`, `email`, `hash`) VALUES ('"+req.body.first+"', '"+req.body.last+"', '"+req.body.email+"', '"+hash+"')",
+       "INSERT INTO `cogss`.`users` (`first`, `last`, `email`, `hash`) " +
+       "VALUES ('"+req.body.first+"', '"+req.body.last+"', '"+req.body.email+"', '"+hash+"')",
         function(err) {
             if (err) throw err;
             res.status(200)

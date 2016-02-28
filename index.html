@@ -43,8 +43,8 @@
                         <li><a href="#/" data-toggle="modal" ng-click="openLoginModal('lg')"> Log In</a></li>
 
                         <li>
-                            <div class="btn-group" uib-dropdown is-open="status.isopen">
-                                <button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle ng-disabled="disabled">
+                            <div class="btn-group" uib-dropdown>
+                                <button id="single-button" type="button" class="btn btn-default" uib-dropdown-toggle>
                                     More <span class="caret"></span>
                                 </button>
                                 <ul uib-dropdown-menu role="menu" aria-labelledby="single-button">
@@ -89,14 +89,16 @@
                 <form class="form-horizontal" role="form" name="loginForm">
                     <div class="form-group">
                         <div class="col-lg-12">
-                            <label>Email:</label>
-                            <input type="email" class="form-control" ng-model="email" required>
+                            <label>Email:
+                                <input type="email" class="form-control" ng-model="email" required>
+                            </label>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-lg-12">
-                            <label>Password:</label>
-                            <input type="password" class="form-control" ng-model="password" required>
+                            <label>Password:
+                                <input type="password" class="form-control" ng-model="password" required>
+                            </label>
                         </div>
                     </div>
                 </form>
@@ -119,26 +121,30 @@
                 <form class="form-horizontal" role="form" name="registerForm">
                     <div class="form-group">
                         <div class="col-lg-12">
-                            <label>First name:</label>
-                            <input type="text" class="form-control" ng-model="firstname">
+                            <label>First name:
+                                <input type="text" class="form-control" ng-model="firstname">
+                            </label>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-lg-12">
-                            <label>Last name:</label>
-                            <input type="text" class="form-control" ng-model="lastname">
+                            <label>Last name:
+                                <input type="text" class="form-control" ng-model="lastname">
+                            </label>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-lg-12">
-                            <label>Email:</label>
-                            <input type="email" class="form-control" ng-model="email" required>
+                            <label>Email:
+                                <input type="email" class="form-control" ng-model="email" required>
+                            </label>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-lg-12">
-                            <label>Password:</label>
-                            <input type="password" class="form-control" ng-model="password" required>
+                            <label>Password:
+                                <input type="password" class="form-control" ng-model="password" required>
+                            </label>
                         </div>
                     </div>
                 </form>
@@ -149,9 +155,6 @@
             </div>
         </script>
 
-        <!-- Search msg //ToDo: Actual search functionality -->
-        {{keywords}}
-
         <data-ng-view></data-ng-view>
 
 
@@ -159,7 +162,7 @@
             <hr>
             <div align=center>
                 <div class="alert alert-warning" role="alert">
-                    While site is under development: Use this site at your own risk
+                    While site is almost complete! Please refrain from using this site until it's complete
                 </div>
                 <p style="clear:both;"><small>This website was created and hosted by James Green for your use!<br>
                     See the source at <a href="https://github.com/Greenjam94/COGSS">Github</a></small></p>
