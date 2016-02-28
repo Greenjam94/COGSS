@@ -1,9 +1,16 @@
-/**
- * Created by james on 1/23/16.
- */
-cogss.controller("HelpCtrl", ["$scope", "$http", function ($scope, $http) {
+cogss.controller("HelpCtrl", ["$scope", function ($scope) {
     "use strict";
+    $scope.subject = "";
+    $scope.message = "";
 
-    var help = this;
+    $scope.sendEmail = function() {
+        window.location.href = "mailto:greenjam94@gmail.com"
+            + "?subject=COGSS:%20" + escape($scope.subject)
+            + "&body=" + escape($scope.message);
+    };
 
+    $scope.resetForm = function() {
+        $scope.subject = "";
+        $scope.message = "";
+    };
 }]);
