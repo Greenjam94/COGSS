@@ -3,7 +3,6 @@ var cogss = angular.module('cogss-ng-app', ['ui.bootstrap', 'ngRoute']);
 cogss.config(['$routeProvider',
     function($routeProvider) {
         $routeProvider
-            //ToDo: Complete routing for views inside views
             .when("/", {
                 templateUrl: "/home/home.html",
                 controller: "HomeCtrl"
@@ -31,10 +30,8 @@ cogss.config(['$routeProvider',
     }
 ]);
 
-cogss.controller("MainCtrl", ["$scope", "$uibModal", "$http", function ($scope, $uibModal, $http) {
+cogss.controller("MainCtrl", ["$scope", "$uibModal", function ($scope, $uibModal) {
     "use strict";
-    var main = this;
-
     $scope.animationsEnabled = true;
 
     $scope.openLoginModal = function (size) {
@@ -74,7 +71,7 @@ cogss.controller('LoginModalInstanceCtrl', function ($scope, $uibModalInstance, 
             alert("Bad email");
             return;
         }
-        //console.log($scope.email, $scope.password);
+
         var user = {email:$scope.email, password: $scope.password};
         $http.post("/login", JSON.stringify(user)).then(function (res) {
             if (200 == res.status) {
@@ -83,6 +80,7 @@ cogss.controller('LoginModalInstanceCtrl', function ($scope, $uibModalInstance, 
                 $scope.auth = "false";
             }
         });
+
         $uibModalInstance.close();
     };
 
@@ -111,7 +109,6 @@ cogss.controller('RegisterModalInstanceCtrl', function ($scope, $uibModalInstanc
     };
 });
 
-//ToDo: Broken search...
 cogss.controller('searchController', ['$scope', function ($scope) {
     $scope.keywords = 'Search';
 }]);
