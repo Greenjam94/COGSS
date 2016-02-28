@@ -15,8 +15,8 @@ needs to be completed by the end of February.
 |GET|/heartbeat|Check to see if the server is online|
 |GET|/meets|Get a list of meets that are public or you have access to|
 |POST|/meets|Create a new meet (Required: name, loco, date)|
-|PUT|/meets|Updates a meet's data|
 |GET|/meets/{meetId}|Get the meet info and teams attending a certain meet|
+|PUT|/meets/{meetId}|Updates a meet's data|
 |GET|/teams/{teamId}|Get the gymansts on a team|
 |POST|/teams|Create a new team (Required: meetId, name, email)|
 |PUT|/teams/{teamId}|Update a team's data|

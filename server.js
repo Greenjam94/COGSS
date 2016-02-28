@@ -65,7 +65,22 @@ app.get("/meets", function (req, res) {
         function(err,rows) {
             if (err) throw err;
             res.status(200).send(rows);
-        });
+        }
+    );
+});
+
+app.post("/meets", function (req, res) {
+    connection.query(
+        'INSERT INTO cogss.meets (`name`, `host`, `location`, `date`, `public`, `createdBy`, `createdOn`) ' +
+        "VALUES ('"+req.body.name+"', '"+req.body.host+"', '"+req.body.location +
+        "', '"+req.body.date+"', '"+req.body.public+"', '"+req.body.createdBy+"', '"+req.body.createdOn+"')",
+        function(err) {
+            if (err) throw err;
+            res.status(200).send(
+                'Added:'+req.body.name+', '+req.body.host+', '+req.body.location+', '+req.body.date+', '+req.body.public
+            );
+        }
+    );
 });
 
 app.get("/meets/:meetID", function (req, res) {
@@ -94,6 +109,25 @@ app.get("/meets/:meetID", function (req, res) {
         });
 });
 
+app.put("/meets/:meetID", function (req, res) {
+    var date = new Date().toISOString().slice(0, 19).replace('T', ' ');
+   connection.query(
+       'UPDATE meets SET ' +
+       'name = "'+req.body.name+'",' +
+       ' host = "'+req.body.host+'",' +
+       ' location = "'+req.body.location+'",'+
+       ' date = "'+req.body.date+'",'+
+       ' public = '+req.body.public+','+
+       ' updatedBy = 0, ' + //ToDo: Don't hardcode user, use UserAuth
+       ' updatedOn = "'+date+'"' +
+       ' WHERE meetID = '+req.params.meetID,
+       function(err) {
+           if (err) throw err;
+           res.status(200);
+       }
+   )
+});
+
 //Teams
 app.get("/teams/:teamID", function (req, res) {
     connection.query(
@@ -102,6 +136,22 @@ app.get("/teams/:teamID", function (req, res) {
             if (err) throw err;
             res.status(200).send(rows);
         });
+});
+
+app.post("/teams", function (req, res) {
+    connection.query(
+       "INSERT INTO `cogss`.`teams` (`meetID`, `name`, `email`, `gender`) VALUES ('"+req.body.meetID+"', '"+req.body.name+"', '"+req.body.email+"', '"+req.body.gender+"')",
+       function(err) {
+           if (err) throw err;
+           connection.query(
+               "SELECT teamID FROM teams WHERE name = '"+req.body.name+"' AND email = '"+req.body.email+"'",
+               function(err,rows) {
+                   if (err) throw err;
+                   res.status(200).send(rows);
+               }
+           )
+       }
+   );
 });
 
 //Gymnasts
@@ -120,6 +170,16 @@ app.get("/gymnasts/:meetID/men", function (req, res) {
         function(err,rows) {
             if (err) throw err;
             res.status(200).send(rows);
+        }
+    );
+});
+
+app.post("/gymnasts", function (req, res) {
+    connection.query(
+        "INSERT INTO `cogss`.`gymnasts` (`teamID`, `meetID`, `first`, `last`, `gender`) VALUES ('"+req.body.teamID+"', '"+req.body.meetID+"', '"+req.body.firstname+"', '"+req.body.lastname+"', '"+req.body.gender+"')",
+        function(err) {
+            if (err) throw err;
+            res.status(200)
         }
     );
 });
@@ -178,7 +238,7 @@ app.get("/users/:meetID", function (req, res) {
             if (err) throw err;
             var ids = rows[0]['users'];
             connection.query(
-                'SELECT first, last, email FROM users WHERE userID in ('+ids+')',
+                'SELECT userID, first, last, email FROM users WHERE userID in ('+ids+')',
                 function(err,rows) {
                     if (err) throw err;
                     res.status(200).send(rows);

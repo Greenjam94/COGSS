@@ -26,36 +26,35 @@
                         <div class="form-group col-lg-12">
                             <div class="input-group">
                                 <span class="input-group-addon" id="name-addon">Meet Name</span>
-                                <input title="name" type="text" class="form-control" value="{{meet.info.info[0].name}}" aria-describedby="name-addon">
+                                <input title="name" type="text" class="form-control"  ng-model="meet.info.info[0].name" value="{{meet.info.info[0].name}}" aria-describedby="name-addon">
                             </div>
                         </div>
                         <div class="form-group col-lg-12">
                             <div class="input-group">
                                 <span class="input-group-addon" id="host-addon">Hosting School</span>
-                                <input title="host" type="text" class="form-control" value="{{meet.info.info[0].host}}" aria-describedby="host-addon">
+                                <input title="host" type="text" class="form-control" ng-model="meet.info.info[0].host" value="{{meet.info.info[0].host}}" aria-describedby="host-addon">
                             </div>
                         </div>
                         <div class="form-group col-lg-12">
                             <div class="input-group">
                                 <span class="input-group-addon" id="location-addon">Location</span>
-                                <input title="location" type="text" class="form-control" value="{{meet.info.info[0].location}}" aria-describedby="location-addon">
+                                <input title="location" type="text" class="form-control" ng-model="meet.info.info[0].location" value="{{meet.info.info[0].location}}" aria-describedby="location-addon">
                             </div>
                         </div>
                         <div class="form-group col-lg-12">
                             <div class="input-group">
                                 <span class="input-group-addon" id="date-addon">Event Date</span>
-                                <input title="date" type="text" class="form-control" value="{{meet.info.info[0].date}}" aria-describedby="basic-addon1">
+                                <input title="date" type="text" class="form-control" ng-model="meet.info.info[0].date" value="{{meet.info.info[0].date}}" aria-describedby="basic-addon1">
                             </div>
                         </div>
                         <div class="form-group col-lg-12"  align="center">
                             <div class="input-group">
-                                <label class="radio-inline"><input type="radio" name="public">Public</label>
-                                <label class="radio-inline"><input type="radio" name="private">Private</label>
+                                <label class="radio-inline"><input type="radio" ng-model="public" ng-value="meet.info.info[0].public" name="public">Public</label>
+                                <label class="radio-inline"><input type="radio" ng-model="public" ng-value="!meet.info.info[0].public" name="private">Private</label>
                             </div>
                         </div>
                         <div class="form-group col-lg-12" align="center">
-                            <!-- ToDo: submit data-ng-click-->
-                            <button type="submit" class="btn btn-primary">Send form</button>
+                            <button type="submit" class="btn btn-primary" ng-click="updateMeetInfo()">Send form</button>
                             <button type="reset" class="btn btn-default">cancel</button>
                         </div>
                     </form>
@@ -80,27 +79,12 @@
                                 <th>Remove</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody ng-repeat="user in meet.users">
                         <!-- ToDo: repeat with conditionals, hopefully first is fine, second (creator), all others get x button-->
                             <tr>
-                                <td>{{meet.users[0].first}} {{meet.users[0].last}} (Admin)</td>
-                                <td>{{meet.users[0].email}}</td>
-                            </tr>
-                            <tr>
-                                <td>{{meet.users[1].first}} {{meet.users[1].last}} (creator)</td>
-                                <td>{{meet.users[1].email}}</td>
-                            </tr>
-                            <tr>
-                                <td>{{meet.users[2].first}} {{meet.users[2].last}}</td>
-                                <td>{{meet.users[2].email}}</td>
-                                <td><button type="button" class="btn btn-sm btn-danger">
-                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                </button></td>
-                            </tr>
-                            <tr>
-                                <td>{{meet.users[3].first}} {{meet.users[3].last}}</td>
-                                <td>{{meet.users[3].email}}</td>
-                                <td><button type="button" class="btn btn-sm btn-danger">
+                                <td>{{user.first}} {{user.last}}</td>
+                                <td>{{user.email}}</td>
+                                <td><button type="button" class="btn btn-sm btn-danger" ng-click="deleteUserFromMeet(user.userID)">
                                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                 </button></td>
                             </tr>

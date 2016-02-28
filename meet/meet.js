@@ -34,6 +34,7 @@ cogss.controller("MeetCtrl", ["$scope", "$http", "$routeParams", function ($scop
     });
 
     $scope.meetID = meetID;
+    $scope.public = 0;
 
     $scope.pickTeam = function(tid) {
         //console.log('attempt to get team '+tid);
@@ -84,6 +85,26 @@ cogss.controller("MeetCtrl", ["$scope", "$http", "$routeParams", function ($scop
         });
     };
 
+    $scope.updateMeetInfo = function () {
+
+        var meetInfo = {
+            name: meet.info.info[0].name,
+            host: meet.info.info[0].host,
+            location: meet.info.info[0].location,
+            date: meet.info.info[0].date,
+            public: $scope.public
+        };
+
+        $http.put("/meets/"+meetID, JSON.stringify(meetInfo)).then(function (res) {
+            //Refresh page
+            console.log(res);
+        });
+    };
+
+    $scope.deleteUserFromMeet = function (id) {
+        console.log("Delete user with id: "+id+", eventually");
+    };
+
     /*
     meet.logout = function(){
         $http.post("/logout").then(function(res){
@@ -103,11 +124,24 @@ cogss.controller("MeetModalCtrl", ["$scope", "$uibModal", "$http", function ($sc
 
     $scope.animationsEnabled = true;
 
-    $scope.openMeetModal = function (size) {
+    $scope.openAddWomensTeamModal = function (size) {
         var modalInstance = $uibModal.open({
             animation: $scope.animationsEnabled,
-            templateUrl: 'MeetModalContent.html',
-            controller: 'MeetModalInstanceCtrl',
+            templateUrl: 'addWomensTeamModalContent.html',
+            controller: 'AddTeamModalInstanceCtrl',
+            size: size
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+            $scope.selected = selectedItem;
+        });
+    };
+
+    $scope.openAddMensTeamModal = function (size) {
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'addMensTeamModalContent.html',
+            controller: 'AddTeamModalInstanceCtrl',
             size: size
         });
 
@@ -117,14 +151,46 @@ cogss.controller("MeetModalCtrl", ["$scope", "$uibModal", "$http", function ($sc
     };
 }]);
 
-cogss.controller('MeetModalInstanceCtrl', ["$scope", "$uibModalInstance", "$htttp", function ($scope, $uibModalInstance, $http) {
+cogss.controller('AddTeamModalInstanceCtrl', ["$scope", "$uibModalInstance", "$http", "$routeParams", function ($scope, $uibModalInstance, $http, $routeParams) {
 
-    //$scope.email = "";
-    //$scope.password = "";
+    $scope.newTeam = {
+        name: '',
+        email: '',
+        gender: 0,
+        gymnasts: []
+    };
 
-    $scope.ok = function () {
-        $http.post("/?", JSON.stringify(null)).then(function (res) {
-            //Do something with result
+    $scope.addWoman = function () {
+        if ($scope.newTeam.gymnasts.length <= 8) {
+            $scope.newTeam.gymnasts.push({teamID:0, meetID:$routeParams.meetId, firstname: '', lastname: '', gender:0})
+        } else {
+            alert('8 member max');
+        }
+    };
+
+    $scope.addMan = function () {
+        if ($scope.newTeam.gymnasts.length <= 8) {
+            $scope.newTeam.gymnasts.push({teamID:0, meetID:$routeParams.meetId, firstname: '', lastname: '', gender:1})
+        } else {
+            alert('8 member max');
+        }
+    };
+
+    $scope.ok = function (gender) {
+        //meetID, team name, email, gender=0
+        var team = {
+            meetID: $routeParams.meetId,
+            name: $scope.newTeam.name,
+            email: $scope.newTeam.email,
+            gender: gender
+        };
+
+        $http.post("/teams", JSON.stringify(team)).then(function(res){
+            for (var i=0; i < $scope.newTeam.gymnasts.length; i++) {
+                $scope.newTeam.gymnasts[i].teamID = res.data[0].teamID;
+                //console.log($scope.newTeam.gymnasts[i]);
+                $http.post("/gymnasts", JSON.stringify($scope.newTeam.gymnasts[i]));
+            }
         });
         $uibModalInstance.close();
     };
