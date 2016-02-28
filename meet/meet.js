@@ -1,11 +1,7 @@
-/**
- * Created by james on 1/29/16.
- */
 cogss.controller("MeetCtrl", ["$scope", "$http", "$routeParams", function ($scope, $http, $routeParams) {
     "use strict";
 
     var meet = this;
-
     var meetID = $routeParams.meetId;
 
     meet.info = {};
@@ -16,10 +12,6 @@ cogss.controller("MeetCtrl", ["$scope", "$http", "$routeParams", function ($scop
     $http.get("/meets/"+meetID).then(function(res) {
         meet.info = res.data;
     });
-
-    //$http.get("/teams/"+teamID).then(function(res) {
-    //    $scope.selectedTeam = res.data;
-    //});
 
     $http.get("/gymnasts/"+meetID+"/women/").then(function(res) {
         meet.women = res.data;
@@ -37,10 +29,8 @@ cogss.controller("MeetCtrl", ["$scope", "$http", "$routeParams", function ($scop
     $scope.public = 0;
 
     $scope.pickTeam = function(tid) {
-        //console.log('attempt to get team '+tid);
         $http.get("/teams/"+tid).then(function(res) {
             $scope.selectedTeam = res.data;
-            //console.log('Select team', res.data);
         });
     };
 
@@ -50,20 +40,13 @@ cogss.controller("MeetCtrl", ["$scope", "$http", "$routeParams", function ($scop
 
     $scope.isMen = function() {
         return ($scope.selectedTeam) ? ($scope.selectedTeam[0].gender == 1 ) : false;
-
     };
 
 
 
     $scope.updateGymnast = function (id, en, es) {
-        //console.log('Attempt to update gymnast', id, en, es);
-        var data = {
-            id: id,
-            eventName: en,
-            eventScore: es
-        };
+        var data = {id: id, eventName: en, eventScore: es};
         $http.put('/gymnasts', JSON.stringify(data)).then(function(res){
-            //console.log('updated AA score: ', res.data);
             if ($scope.selectedTeam) {
                 for (var i = 0; i < $scope.selectedTeam.length; i++) {
                     if ($scope.selectedTeam[i].gymnastID == id) {
@@ -71,22 +54,22 @@ cogss.controller("MeetCtrl", ["$scope", "$http", "$routeParams", function ($scop
                     }
                 }
             }
+
             for(var j=0; j < meet.women.length; j++ ) {
                 if (meet.women[j].gymnastID == id) {
                     meet.women[j].score = res.data;
                 }
             }
+
             for(var k=0; k < meet.men.length; k++ ) {
                 if (meet.men[k].gymnastID == id) {
                     meet.men[k].score = res.data;
                 }
             }
-
         });
     };
 
     $scope.updateMeetInfo = function () {
-
         var meetInfo = {
             name: meet.info.info[0].name,
             host: meet.info.info[0].host,
@@ -95,32 +78,16 @@ cogss.controller("MeetCtrl", ["$scope", "$http", "$routeParams", function ($scop
             public: $scope.public
         };
 
-        $http.put("/meets/"+meetID, JSON.stringify(meetInfo)).then(function (res) {
-            //Refresh page
-            console.log(res);
-        });
+        $http.put("/meets/"+meetID, JSON.stringify(meetInfo));
     };
 
     $scope.deleteUserFromMeet = function (id) {
-        console.log("Delete user with id: "+id+", eventually");
+        console.log("Delete user with id: "+id+", eventually"); //ToDo: Delete users
     };
-
-    /*
-    meet.logout = function(){
-        $http.post("/logout").then(function(res){
-            if (res.status === 200) {
-                window.location.href  = "#/";
-            } else {
-                console.log("Error on logout", res);
-            }
-        });
-    };
-    */
 }]);
 
-cogss.controller("MeetModalCtrl", ["$scope", "$uibModal", "$http", function ($scope, $uibModal, $http) {
+cogss.controller("MeetModalCtrl", ["$scope", "$uibModal", function ($scope, $uibModal) {
     "use strict";
-    var main = this;
 
     $scope.animationsEnabled = true;
 
@@ -151,8 +118,8 @@ cogss.controller("MeetModalCtrl", ["$scope", "$uibModal", "$http", function ($sc
     };
 }]);
 
-cogss.controller('AddTeamModalInstanceCtrl', ["$scope", "$uibModalInstance", "$http", "$routeParams", function ($scope, $uibModalInstance, $http, $routeParams) {
-
+cogss.controller('AddTeamModalInstanceCtrl', ["$scope", "$uibModalInstance", "$http", "$routeParams",
+    function ($scope, $uibModalInstance, $http, $routeParams) {
     $scope.newTeam = {
         name: '',
         email: '',
@@ -177,7 +144,6 @@ cogss.controller('AddTeamModalInstanceCtrl', ["$scope", "$uibModalInstance", "$h
     };
 
     $scope.ok = function (gender) {
-        //meetID, team name, email, gender=0
         var team = {
             meetID: $routeParams.meetId,
             name: $scope.newTeam.name,
@@ -188,7 +154,6 @@ cogss.controller('AddTeamModalInstanceCtrl', ["$scope", "$uibModalInstance", "$h
         $http.post("/teams", JSON.stringify(team)).then(function(res){
             for (var i=0; i < $scope.newTeam.gymnasts.length; i++) {
                 $scope.newTeam.gymnasts[i].teamID = res.data[0].teamID;
-                //console.log($scope.newTeam.gymnasts[i]);
                 $http.post("/gymnasts", JSON.stringify($scope.newTeam.gymnasts[i]));
             }
         });

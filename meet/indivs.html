@@ -32,7 +32,7 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="gymnast in meet.women">
-                                <td>#</td>
+                                <td>{{$index+1}}</td>
                                 <td>{{gymnast.first}} {{gymnast.last}}<input type="hidden" title="gymnastID" value="{{gymnast.gymnastID}}"></td>
                                 <td>{{gymnast.score}}</td>
                                 <td>
@@ -94,7 +94,7 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="gymnast in meet.men">
-                                <td>#</td>
+                                <td>{{$index+1}}</td>
                                 <td>{{gymnast.first}} {{gymnast.last}}</td>
                                 <td ng-model="gymnast.aa">{{gymnast.score}}</td>
                                 <td>
