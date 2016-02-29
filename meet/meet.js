@@ -128,19 +128,11 @@ cogss.controller('AddTeamModalInstanceCtrl', ["$scope", "$uibModalInstance", "$h
     };
 
     $scope.addWoman = function () {
-        if ($scope.newTeam.gymnasts.length <= 8) {
-            $scope.newTeam.gymnasts.push({teamID:0, meetID:$routeParams.meetId, firstname: '', lastname: '', gender:0})
-        } else {
-            alert('8 member max');
-        }
+        $scope.newTeam.gymnasts.push({teamID:0, meetID:$routeParams.meetId, firstname: '', lastname: '', gender: 0});
     };
 
     $scope.addMan = function () {
-        if ($scope.newTeam.gymnasts.length <= 8) {
-            $scope.newTeam.gymnasts.push({teamID:0, meetID:$routeParams.meetId, firstname: '', lastname: '', gender:1})
-        } else {
-            alert('8 member max');
-        }
+        $scope.newTeam.gymnasts.push({teamID:0, meetID:$routeParams.meetId, firstname: '', lastname: '', gender: 1});
     };
 
     $scope.ok = function (gender) {
