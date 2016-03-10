@@ -24,6 +24,7 @@ needs to be completed by the end of February.
 |GET|/gymnasts/{meetId}/men|Get mens scores for a meet|
 |POST|/gymnasts|Create a new gymnast (Required: teamId, first name, gender)|
 |PUT|/gymnasts/{gymnastId}|Update a gymnast|
+|GET|/users|Get a list of all user's IDs and emails on the website|
 |GET|/users/{meetID}|Users with access to a meet|
 |POST|/users|Add a new user (Required: email, password)|
 |PUT|/users/{userId}|Update a user|

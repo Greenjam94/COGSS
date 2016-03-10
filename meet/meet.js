@@ -82,7 +82,7 @@ cogss.controller("MeetCtrl", ["$scope", "$http", "$routeParams", function ($scop
     };
 
     $scope.deleteUserFromMeet = function (id) {
-        console.log("Delete user with id: "+id+", eventually"); //ToDo: Delete users
+
     };
 }]);
 
@@ -109,6 +109,19 @@ cogss.controller("MeetModalCtrl", ["$scope", "$uibModal", function ($scope, $uib
             animation: $scope.animationsEnabled,
             templateUrl: 'addMensTeamModalContent.html',
             controller: 'AddTeamModalInstanceCtrl',
+            size: size
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+            $scope.selected = selectedItem;
+        });
+    };
+
+    $scope.addUserToMeetModal = function (size) {
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'AddUserToMeetModalContent.html',
+            controller: 'AddUserToMeetModalInstanceCtrl',
             size: size
         });
 
@@ -156,3 +169,30 @@ cogss.controller('AddTeamModalInstanceCtrl', ["$scope", "$uibModalInstance", "$h
         $uibModalInstance.dismiss('cancel');
     };
 }]);
+
+cogss.controller('AddUserToMeetModalInstanceCtrl', ["$scope", "$uibModalInstance", "$http", "$routeParams",
+    function ($scope, $uibModalInstance, $http, $routeParams) {
+        $scope.data = {
+            user: "",
+            users: []
+        };
+
+        $http.get("/users").then(function(res){
+            $scope.data.users = res.data;
+        });
+
+
+        $scope.ok = function () {
+            console.log('ok');
+            var newUser = {user: $scope.data.user};
+
+            $http.put("/meets/"+$routeParams.meetId, newUser).then(function(){
+                alert("New user added to meet");
+            });
+            $uibModalInstance.close();
+        };
+
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss('cancel');
+        };
+    }]);

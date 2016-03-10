@@ -66,8 +66,10 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="heading-title">
+                        <div data-ng-controller="MeetModalCtrl as addUser">
+                            <button type="button" class="btn btn-default pull-right" ng-click="addUserToMeetModal()">Add User</button>
+                        </div>
                         COGSS users with access
-                        <button type="button" class="btn btn-default pull-right">Add User</button>
                     </h4>
                 </div>
                 <div class="panel-body">
@@ -80,7 +82,6 @@
                             </tr>
                         </thead>
                         <tbody ng-repeat="user in meet.users">
-                        <!-- ToDo: repeat with conditionals, hopefully first is fine, second (creator), all others get x button-->
                             <tr>
                                 <td>{{user.first}} {{user.last}}</td>
                                 <td>{{user.email}}</td>
@@ -94,4 +95,25 @@
             </div>
         </div>
     </div>
+
+    <script type="text/ng-template" id="AddUserToMeetModalContent.html">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title" id="menModalLabel">Add a new men's team</h4>
+        </div>
+        <div class="modal-body">
+            <form name="myForm">
+                <label for="repeatSelect"> Select user to give access: </label>
+                <select name="repeatSelect" id="repeatSelect" ng-model="data.user">
+                    <option ng-repeat="user in data.users" ng-value="user.userID">{{user.email}}</option>
+                </select>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">Add user</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
 </div>
