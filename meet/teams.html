@@ -38,7 +38,7 @@
                             <tr ng-repeat="wTeam in meet.info.womensTeams" class="clickable-row" ng-click="(pickTeam(wTeam.teamID))" >
                                 <td>{{$index+1}}</td>
                                 <td>{{wTeam.name}}</td>
-                                <td>{{wTeam.score}}</td>
+                                <td>{{wTeam.Score}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -68,7 +68,7 @@
                             <tr ng-repeat="mTeam in meet.info.mensTeams" class="clickable-row" ng-click="(pickTeam(mTeam.teamID))" >
                                 <td>{{$index+1}}</td>
                                 <td>{{mTeam.name}}</td>
-                                <td>{{mTeam.score}}</td>
+                                <td>{{mTeam.Score}}</td>
                             </tr>
                         </tbody>
                     </table>

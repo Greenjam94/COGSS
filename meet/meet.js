@@ -11,6 +11,7 @@ cogss.controller("MeetCtrl", ["$scope", "$http", "$routeParams", function ($scop
 
     $http.get("/meets/"+meetID).then(function(res) {
         meet.info = res.data;
+        console.log(meet.info.womensTeams);
     });
 
     $http.get("/gymnasts/"+meetID+"/women/").then(function(res) {
