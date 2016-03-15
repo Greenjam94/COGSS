@@ -27,6 +27,7 @@ cogss.controller("MeetCtrl", ["$scope", "$http", "$routeParams", function ($scop
     });
 
     $scope.meetID = meetID;
+    $scope.teamID = 0;
     $scope.public = 0;
 
     $scope.sortBy = 'score';
@@ -34,9 +35,49 @@ cogss.controller("MeetCtrl", ["$scope", "$http", "$routeParams", function ($scop
     $scope.filter = '';
 
     $scope.pickTeam = function(tid) {
+        $scope.teamID = tid;
         $http.get("/teams/"+tid).then(function(res) {
             $scope.selectedTeam = res.data;
         });
+    };
+
+    $scope.newFirst = '';
+    $scope.newLast = '';
+
+    $scope.addWomanToTeam = function () {
+        var gymnast = {teamID:$scope.teamID.toString(),
+                        meetID:$routeParams.meetId,
+                        first: $scope.newFirst,
+                        last: $scope.newLast,
+                        gender: "0"};
+        $scope.selectedTeam.push(gymnast);
+
+        gymnast = {teamID:$scope.teamID.toString(),
+            meetID:$routeParams.meetId,
+            firstname: $scope.newFirst,
+            lastname: $scope.newLast,
+            gender: "0"};
+        $http.post("/gymnasts", gymnast);
+        alert("Refresh before adding new scores");
+
+    };
+
+    $scope.addManToTeam = function () {
+        var gymnast = {teamID:$scope.teamID.toString(),
+                        meetID:$routeParams.meetId,
+                        first: $scope.newFirst,
+                        last: $scope.newLast,
+                        gender: "1"};
+
+        $scope.selectedTeam.push(gymnast);
+
+        gymnast = {teamID:$scope.teamID.toString(),
+            meetID:$routeParams.meetId,
+            firstname: $scope.newFirst,
+            lastname: $scope.newLast,
+            gender: "1"};
+        $http.post("/gymnasts", gymnast);
+        alert("Refresh before adding new scores");
     };
 
     $scope.isWomen = function() {
@@ -47,10 +88,8 @@ cogss.controller("MeetCtrl", ["$scope", "$http", "$routeParams", function ($scop
         return ($scope.selectedTeam) ? ($scope.selectedTeam[0].gender == 1 ) : false;
     };
 
-
-
     $scope.updateGymnast = function (id, en, es) {
-        console.log(id);
+        console.log("Updating id: "+id+", score: "+es);
         var data = {id: id, eventName: en, eventScore: es};
         $http.put('/gymnasts', JSON.stringify(data)).then(function(res){
             if ($scope.selectedTeam) {
