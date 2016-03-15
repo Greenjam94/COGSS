@@ -87,19 +87,17 @@
         <div class="panel-body">
             <table class="table">
                 <thead>
-                <tr>
-                    <th>Rank</th>
-                    <th>Name</th>
-                    <th>AA</th>
-                    <th>Vault</th>
-                    <th>Bars</th>
-                    <th>Beams</th>
-                    <th>Floor</th>
-                </tr>
+                    <tr>
+                        <th>Name</th>
+                        <th>AA</th>
+                        <th>Vault</th>
+                        <th>Bars</th>
+                        <th>Beams</th>
+                        <th>Floor</th>
+                    </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="gymnast in selectedTeam">
-                        <td>{{$index+1}}</td>
                         <td>{{gymnast.first}} {{gymnast.last}}</td>
                         <td ng-model="gymnast.aa">{{gymnast.score}}</td>
                         <td>
@@ -150,7 +148,6 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th>Rank</th>
                     <th>Name</th>
                     <th>AA</th>
                     <th>Floor</th>
@@ -163,7 +160,6 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="gymnast in selectedTeam | orderBy:-score">
-                    <td>{{$index+1}}</td>
                     <td>{{gymnast.first}} {{gymnast.last}}</td>
                     <td ng-model="gymnast.aa">{{gymnast.score}}</td>
                     <td>
