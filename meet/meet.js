@@ -11,7 +11,7 @@ cogss.controller("MeetCtrl", ["$scope", "$http", "$routeParams", function ($scop
 
     $http.get("/meets/"+meetID).then(function(res) {
         meet.info = res.data;
-        console.log(meet.info.womensTeams);
+        //console.log(meet.info.womensTeams);
     });
 
     $http.get("/gymnasts/"+meetID+"/women/").then(function(res) {
@@ -28,6 +28,10 @@ cogss.controller("MeetCtrl", ["$scope", "$http", "$routeParams", function ($scop
 
     $scope.meetID = meetID;
     $scope.public = 0;
+
+    $scope.sortBy = 'score';
+    $scope.sortReverse = true;
+    $scope.filter = '';
 
     $scope.pickTeam = function(tid) {
         $http.get("/teams/"+tid).then(function(res) {
@@ -46,6 +50,7 @@ cogss.controller("MeetCtrl", ["$scope", "$http", "$routeParams", function ($scop
 
 
     $scope.updateGymnast = function (id, en, es) {
+        console.log(id);
         var data = {id: id, eventName: en, eventScore: es};
         $http.put('/gymnasts', JSON.stringify(data)).then(function(res){
             if ($scope.selectedTeam) {

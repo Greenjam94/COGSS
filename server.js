@@ -111,16 +111,33 @@ app.get("/meets/:meetID", function (req, res) {
 app.put("/meets/:meetID", function (req, res) {
     var date = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
+    //build query
+    var meetInfoQuery = 'UPDATE meets SET ';
+    if (typeof req.body.name != "undefined") {
+        meetInfoQuery += 'name = "'+req.body.name+'", ';
+    }
+    if (typeof req.body.host != "undefined") {
+        meetInfoQuery += 'host = "'+req.body.host+'", ';
+    }
+    if (typeof req.body.location != "undefined") {
+        meetInfoQuery += 'location = "'+req.body.location+'", ';
+    }
+    if (typeof req.body.date != "undefined") {
+        meetInfoQuery += 'date = "'+req.body.date+'", ';
+    }
+    if (typeof req.body.public != "undefined") {
+        meetInfoQuery += 'public = "'+req.body.public+'", ';
+    }
+    if (typeof req.body.user != "undefined") {
+        var user = ','+req.body.user;
+        meetInfoQuery += 'users = CONCAT(users, "'+user+'"), ';
+    }
+
+    meetInfoQuery += ' updatedBy = 0, ' + //ToDo: Actual user ID
+        ' updatedOn = "'+date+'" WHERE meetID = '+req.params.meetID;
+
     connection.query(
-       'UPDATE meets SET ' +
-       'name = "'+req.body.name+'",' +
-       ' host = "'+req.body.host+'",' +
-       ' location = "'+req.body.location+'",'+
-       ' date = "'+req.body.date+'",'+
-       ' public = '+req.body.public+','+
-       ' updatedBy = 0, ' +
-       ' updatedOn = "'+date+'"' +
-       ' WHERE meetID = '+req.params.meetID,
+       meetInfoQuery,
        function(err) {
            if (err) throw err;
            res.status(200);
@@ -194,11 +211,9 @@ app.put("/gymnasts", function (req, res) {
     //validate
     if (req.body.eventName == undefined || req.body.id == undefined || req.body.eventScore == undefined) {
         res.status(401).send("Poor request, a field was undefined");
-        //ToDo: Log bad request
         return;
     } else if (isNaN(req.body.eventScore) && !isFinite(req.body.eventScore)) {
         res.status(401).send("Poor request, invalid score");
-        //ToDo: Log bad event score
         return;
     }
 
@@ -208,7 +223,7 @@ app.put("/gymnasts", function (req, res) {
         function(err) {
             if (err) throw err;
             connection.query(
-                'SELECT wVault, wBars, wBeam, wFloor, mFloor, mPommel, mRings, mVault, mParallel, mHigh' +
+                'SELECT teamID, meetID, wVault, wBars, wBeam, wFloor, mFloor, mPommel, mRings, mVault, mParallel, mHigh' +
                 ' FROM gymnasts' +
                 ' WHERE gymnastID = '+req.body.id,
                 function(err,rows) {
@@ -223,11 +238,25 @@ app.put("/gymnasts", function (req, res) {
                                     rows[0].mVault +
                                     rows[0].mParallel +
                                     rows[0].mHigh;
+                    var teamID = rows[0].teamID;
+                    var meetID = rows[0].meetID;
                     connection.query(
                         'UPDATE gymnasts SET score = '+allAround+' WHERE gymnastID = '+req.body.id,
                         function(err) {
                             if (err) throw err;
-                            res.status(200).send(JSON.stringify(allAround));
+                            connection.query(
+                                'UPDATE teams '+
+                                'SET Score = '+
+                                    '(SELECT SUM(score) '+
+                                    'FROM gymnasts '+
+                                    'WHERE meetID = '+meetID+
+                                    ' AND teamID = '+teamID+')'+
+                                ' WHERE teamID ='+teamID,
+                                function (err) {
+                                    if (err) throw err;
+                                    res.status(200).send(JSON.stringify(allAround));
+                                }
+                            );
                         }
                     );
                 }
@@ -237,6 +266,16 @@ app.put("/gymnasts", function (req, res) {
 });
 
 //Users
+app.get("/users", function (req, res) {
+    connection.query(
+        'SELECT userID, email FROM users',
+        function(err, rows) {
+            if (err) throw err;
+            res.status(200).send(rows);
+        }
+    );
+});
+
 app.get("/users/:meetID", function (req, res) {
     connection.query(
         'SELECT users FROM meets WHERE meetID = '+connection.escape(req.params.meetID),
