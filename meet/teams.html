@@ -34,8 +34,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- ToDo: Selected row can be class="clickable-row acive"-->
-                            <tr ng-repeat="wTeam in meet.info.womensTeams" class="clickable-row" ng-click="(pickTeam(wTeam.teamID))" >
+                            <tr ng-repeat="wTeam in meet.info.womensTeams | orderBy:SortBy:sortReverse" class="clickable-row" ng-click="pickTeam(wTeam.teamID)" >
                                 <td>{{$index+1}}</td>
                                 <td>{{wTeam.name}}</td>
                                 <td>{{wTeam.Score}}</td>
@@ -65,7 +64,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="mTeam in meet.info.mensTeams" class="clickable-row" ng-click="(pickTeam(mTeam.teamID))" >
+                            <tr ng-repeat="mTeam in meet.info.mensTeams | orderBy:SortBy:sortReverse" class="clickable-row" ng-click="pickTeam(mTeam.teamID)" >
                                 <td>{{$index+1}}</td>
                                 <td>{{mTeam.name}}</td>
                                 <td>{{mTeam.Score}}</td>

@@ -31,6 +31,7 @@ cogss.controller("MeetCtrl", ["$scope", "$http", "$routeParams", function ($scop
     $scope.public = 0;
 
     $scope.sortBy = 'score';
+    $scope.SortBy = 'Score'; //For team score sorting high to low
     $scope.sortReverse = true;
     $scope.filter = '';
 
