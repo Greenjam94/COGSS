@@ -223,7 +223,7 @@ app.put("/gymnasts", function (req, res) {
         function(err) {
             if (err) throw err;
             connection.query(
-                'SELECT teamID, meetID, wVault, wBars, wBeam, wFloor, mFloor, mPommel, mRings, mVault, mParallel, mHigh' +
+                'SELECT teamID, meetID, gender, wVault, wBars, wBeam, wFloor, mFloor, mPommel, mRings, mVault, mParallel, mHigh' +
                 ' FROM gymnasts' +
                 ' WHERE gymnastID = '+req.body.id,
                 function(err,rows) {
@@ -240,23 +240,42 @@ app.put("/gymnasts", function (req, res) {
                                     rows[0].mHigh;
                     var teamID = rows[0].teamID;
                     var meetID = rows[0].meetID;
+                    var gender = rows[0].gender;
                     connection.query(
                         'UPDATE gymnasts SET score = '+allAround+' WHERE gymnastID = '+req.body.id,
                         function(err) {
                             if (err) throw err;
-                            connection.query(
-                                'UPDATE teams '+
-                                'SET Score = '+
-                                    '(SELECT SUM(score) '+
-                                    'FROM gymnasts '+
-                                    'WHERE meetID = '+meetID+
-                                    ' AND teamID = '+teamID+')'+
-                                ' WHERE teamID ='+teamID,
-                                function (err) {
-                                    if (err) throw err;
-                                    res.status(200).send(JSON.stringify(allAround));
-                                }
-                            );
+                            if (gender == 0) {
+                                connection.query(
+                                    'UPDATE teams ' +
+                                    '   SET Score = ' +
+                                    'SELECT SUM(wVault)+SUM(wBars)+SUM(wBeam)+SUM(wFloor) ' +
+                                    '  FROM gymnasts ' +
+                                    ' WHERE meetID = ' + meetID +
+                                    '   AND teamID = ' + teamID +
+                                    ' LIMIT 4)' +
+                                    ' WHERE teamID =' + teamID,
+                                    function (err) {
+                                        if (err) throw err;
+                                        res.status(200).send(JSON.stringify(allAround));
+                                    }
+                                );
+                            } else if (gender == 1) {
+                                connection.query(
+                                    'UPDATE teams ' +
+                                    '   SET Score = ' +
+                                    'SELECT SUM(mFloor)+SUM(mPommel)+SUM(mRings)+SUM(mVault)+SUM(mParallel)+SUM(mHigh) ' +
+                                    '  FROM gymnasts ' +
+                                    ' WHERE meetID = ' + meetID +
+                                    '   AND teamID = ' + teamID +
+                                    ' LIMIT 3)' +
+                                    ' WHERE teamID =' + teamID,
+                                    function (err) {
+                                        if (err) throw err;
+                                        res.status(200).send(JSON.stringify(allAround));
+                                    }
+                                );
+                            }
                         }
                     );
                 }
