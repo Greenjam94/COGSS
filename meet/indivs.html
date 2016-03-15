@@ -67,40 +67,12 @@
                         <tbody>
                             <tr ng-repeat="gymnast in meet.women | orderBy:sortBy:sortReverse | filter:filter">
                                 <td>{{$index+1}}</td>
-                                <td>{{gymnast.first}} {{gymnast.last}}<input type="hidden" title="gymnastID" value="{{gymnast.gymnastID}}"></td>
+                                <td>{{gymnast.first}} {{gymnast.last}}</td>
                                 <td>{{gymnast.score}}</td>
-                                <td>
-                                    <input class="eventScore"
-                                           title="wVault" value="{{gymnast.wVault}}"
-                                           type="number" min="0" max="10"
-                                           ng-model="gymnast.wVault"
-                                           ng-change="updateGymnast(gymnast.gymnastID, 'wVault', gymnast.wVault)"
-                                           ng-model-options="{updateOn: 'blur'}">
-                                </td>
-                                <td>
-                                    <input class="eventScore"
-                                           title="wBars" value="{{gymnast.wBars}}"
-                                           type="number" min="0" max="10"
-                                           ng-model="gymnast.wBars"
-                                           ng-change="updateGymnast(gymnast.gymnastID, 'wBars', gymnast.wBars)"
-                                           ng-model-options="{updateOn: 'blur'}">
-                                </td>
-                                <td>
-                                    <input class="eventScore"
-                                           title="wBeam" value="{{gymnast.wBeam}}"
-                                           type="number" min="0" max="10"
-                                           ng-model="gymnast.wBeam"
-                                           ng-change="updateGymnast(gymnast.gymnastID, 'wBeam', gymnast.wBeam)"
-                                           ng-model-options="{updateOn: 'blur'}">
-                                </td>
-                                <td>
-                                    <input class="eventScore"
-                                           title="wFloor" value="{{gymnast.wFloor}}"
-                                           type="number" min="0" max="10"
-                                           ng-model="gymnast.wFloor"
-                                           ng-change="updateGymnast(gymnast.gymnastID, 'wFloor', gymnast.wFloor)"
-                                           ng-model-options="{updateOn: 'blur'}">
-                                </td>
+                                <td>{{gymnast.wVault}}</td>
+                                <td>{{gymnast.wBars}}</td>
+                                <td>{{gymnast.wBeam}}</td>
+                                <td>{{gymnast.wFloor}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -166,54 +138,12 @@
                                 <td>{{$index+1}}</td>
                                 <td>{{gymnast.first}} {{gymnast.last}}</td>
                                 <td ng-model="gymnast.aa">{{gymnast.score}}</td>
-                                <td>
-                                    <input class="eventScore"
-                                           title="mFloor" value="{{gymnast.mFloor}}"
-                                           type="number" min="0"
-                                           ng-model="gymnast.mFloor"
-                                           ng-change="updateGymnast(gymnast.gymnastID, 'mFloor', gymnast.mFloor)"
-                                           ng-model-options="{updateOn: 'blur'}">
-                                </td>
-                                <td>
-                                    <input class="eventScore"
-                                           title="mPommel" value="{{gymnast.mPommel}}"
-                                           type="number" min="0"
-                                           ng-model="gymnast.mPommel"
-                                           ng-change="updateGymnast(gymnast.gymnastID, 'mPommel', gymnast.mPommel)"
-                                           ng-model-options="{updateOn: 'blur'}">
-                                </td>
-                                <td>
-                                    <input class="eventScore"
-                                           title="mRings" value="{{gymnast.mRings}}"
-                                           type="number" min="0"
-                                           ng-model="gymnast.mRings"
-                                           ng-change="updateGymnast(gymnast.gymnastID, 'mRings', gymnast.mRings)"
-                                           ng-model-options="{updateOn: 'blur'}">
-                                </td>
-                                <td>
-                                    <input class="eventScore"
-                                           title="mVault" value="{{gymnast.mVault}}"
-                                           type="number" min="0"
-                                           ng-model="gymnast.mVault"
-                                           ng-change="updateGymnast(gymnast.gymnastID, 'mVault', gymnast.mVault)"
-                                           ng-model-options="{updateOn: 'blur'}">
-                                </td>
-                                <td>
-                                    <input class="eventScore"
-                                           title="mParallel" value="{{gymnast.mParallel}}"
-                                           type="number" min="0"
-                                           ng-model="gymnast.mParallel"
-                                           ng-change="updateGymnast(gymnast.gymnastID, 'mParallel', gymnast.mParallel)"
-                                           ng-model-options="{updateOn: 'blur'}">
-                                </td>
-                                <td>
-                                    <input class="eventScore"
-                                           title="mHigh" value="{{gymnast.mHigh}}"
-                                           type="number" min="0"
-                                           ng-model="gymnast.mHigh"
-                                           ng-change="updateGymnast(gymnast.gymnastID, 'mHigh', gynast.mHigh)"
-                                           ng-model-options="{updateOn: 'blur'}">
-                                </td>
+                                <td>{{gymnast.mFloor}}</td>
+                                <td>{{gymnast.mPommel}}</td>
+                                <td>{{gymnast.mRings}}</td>
+                                <td>{{gymnast.mVault}}</td>
+                                <td>{{gymnast.mParallel}}</td>
+                                <td>{{gymnast.mHigh}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -221,5 +151,4 @@
             </div>
         </div>
     </div>
-
 </div>
