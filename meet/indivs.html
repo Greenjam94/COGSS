@@ -22,133 +22,130 @@
         </div>
     </form>
 
-    <div class="row">
-        <div class="col-lg-5">
-            <div class="panel panel-default">
-                <div class="panel-heading">Women</div>
-                <div class="panel-body">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>Rank</th>
-                            <th>Name</th>
-                            <th>
-                                <a ng-click="sortBy = 'score'">
-                                    AA
-                                    <span ng-show="sortBy == 'score'" class="glyphicon glyphicon-chevron-down"></span>
-                                </a>
-                            </th>
-                            <th>
-                                <a ng-click="sortBy = 'wVault'">
-                                    Vault
-                                    <span ng-show="sortBy == 'wVault'" class="glyphicon glyphicon-chevron-down"></span>
-                                </a>
-                            </th>
-                            <th>
-                                <a ng-click="sortBy = 'wBars'">
-                                    Bars
-                                    <span ng-show="sortBy == 'wBars'" class="glyphicon glyphicon-chevron-down"></span>
-                                </a>
-                            </th>
-                            <th>
-                                <a ng-click="sortBy = 'wBeam'">
-                                    Beam
-                                    <span ng-show="sortBy == 'wBeam'" class="glyphicon glyphicon-chevron-down"></span>
-                                </a>
-                            </th>
-                            <th>
-                                <a ng-click="sortBy = 'wFloor'">
-                                    Floor
-                                    <span ng-show="sortBy == 'wFloor'" class="glyphicon glyphicon-chevron-down"></span>
-                                </a>
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="gymnast in meet.women | orderBy:sortBy:sortReverse | filter:filter">
-                                <td>{{$index+1}}</td>
-                                <td>{{gymnast.first}} {{gymnast.last}}</td>
-                                <td>{{gymnast.score}}</td>
-                                <td>{{gymnast.wVault}}</td>
-                                <td>{{gymnast.wBars}}</td>
-                                <td>{{gymnast.wBeam}}</td>
-                                <td>{{gymnast.wFloor}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
 
-        <div class="col-lg-7">
-            <div class="panel panel-default">
-                <div class="panel-heading">Men</div>
-                <div class="panel-body">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>Rank</th>
-                            <th>Name</th>
-                            <th>
-                                <a ng-click="sortBy = 'score'">
-                                    AA
-                                    <span ng-show="sortBy == 'score'" class="glyphicon glyphicon-chevron-down"></span>
-                                </a>
-                            </th>
-                            <th>
-                                <a ng-click="sortBy = 'mFloor'">
-                                    Floor
-                                    <span ng-show="sortBy == 'mFloor'" class="glyphicon glyphicon-chevron-down"></span>
-                                </a>
-                            </th>
-                            <th>
-                                <a ng-click="sortBy = 'mPommel'">
-                                    Pommel
-                                    <span ng-show="sortBy == 'mPommel'" class="glyphicon glyphicon-chevron-down"></span>
-                                </a>
-                            </th>
-                            <th>
-                                <a ng-click="sortBy = 'mRings'">
-                                    Rings
-                                    <span ng-show="sortBy == 'mRings'" class="glyphicon glyphicon-chevron-down"></span>
-                                </a>
-                            </th>
-                            <th>
-                                <a ng-click="sortBy = 'mVault'">
-                                    Vault
-                                    <span ng-show="sortBy == 'mVault'" class="glyphicon glyphicon-chevron-down"></span>
-                                </a>
-                            </th>
-                            <th>
-                                <a ng-click="sortBy = 'mParallel'">
-                                    P Bars
-                                    <span ng-show="sortBy == 'mParallel'" class="glyphicon glyphicon-chevron-down"></span>
-                                </a>
-                            </th>
-                            <th>
-                                <a ng-click="sortBy = 'mHigh'">
-                                    High Bar
-                                    <span ng-show="sortBy == 'mHigh'" class="glyphicon glyphicon-chevron-down"></span>
-                                </a>
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="gymnast in meet.men | orderBy:sortBy:sortReverse | filter:filter">
-                                <td>{{$index+1}}</td>
-                                <td>{{gymnast.first}} {{gymnast.last}}</td>
-                                <td ng-model="gymnast.aa">{{gymnast.score}}</td>
-                                <td>{{gymnast.mFloor}}</td>
-                                <td>{{gymnast.mPommel}}</td>
-                                <td>{{gymnast.mRings}}</td>
-                                <td>{{gymnast.mVault}}</td>
-                                <td>{{gymnast.mParallel}}</td>
-                                <td>{{gymnast.mHigh}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">Women</div>
+        <div class="panel-body">
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Team</th>
+                    <th>
+                        <a ng-click="sortBy = 'score'">
+                            AA
+                            <span ng-show="sortBy == 'score'" class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a ng-click="sortBy = 'wVault'">
+                            Vault
+                            <span ng-show="sortBy == 'wVault'" class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a ng-click="sortBy = 'wBars'">
+                            Bars
+                            <span ng-show="sortBy == 'wBars'" class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a ng-click="sortBy = 'wBeam'">
+                            Beam
+                            <span ng-show="sortBy == 'wBeam'" class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a ng-click="sortBy = 'wFloor'">
+                            Floor
+                            <span ng-show="sortBy == 'wFloor'" class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="gymnast in meet.women | orderBy:[sortBy, 'score']:sortReverse | filter:filter">
+                    <td>{{gymnast.first}} {{gymnast.last}}</td>
+                    <td>{{wteams[gymnast.teamID]}}</td>
+                    <td>{{gymnast.score}}</td>
+                    <td>{{gymnast.wVault}}</td>
+                    <td>{{gymnast.wBars}}</td>
+                    <td>{{gymnast.wBeam}}</td>
+                    <td>{{gymnast.wFloor}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Men</div>
+        <div class="panel-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Team</th>
+                    <th>
+                        <a ng-click="sortBy = 'score'">
+                            AA
+                            <span ng-show="sortBy == 'score'" class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a ng-click="sortBy = 'mFloor'">
+                            Floor
+                            <span ng-show="sortBy == 'mFloor'" class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a ng-click="sortBy = 'mPommel'">
+                            Pommel
+                            <span ng-show="sortBy == 'mPommel'" class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a ng-click="sortBy = 'mRings'">
+                            Rings
+                            <span ng-show="sortBy == 'mRings'" class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a ng-click="sortBy = 'mVault'">
+                            Vault
+                            <span ng-show="sortBy == 'mVault'" class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a ng-click="sortBy = 'mParallel'">
+                            P Bars
+                            <span ng-show="sortBy == 'mParallel'" class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a ng-click="sortBy = 'mHigh'">
+                            High Bar
+                            <span ng-show="sortBy == 'mHigh'" class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="gymnast in meet.men | orderBy:[sortBy, 'score']:sortReverse | filter:filter">
+                    <td>{{gymnast.first}} {{gymnast.last}}</td>
+                    <td>{{mteams[gymnast.teamID]}}</td>
+                    <td ng-model="gymnast.aa">{{gymnast.score}}</td>
+                    <td>{{gymnast.mFloor}}</td>
+                    <td>{{gymnast.mPommel}}</td>
+                    <td>{{gymnast.mRings}}</td>
+                    <td>{{gymnast.mVault}}</td>
+                    <td>{{gymnast.mParallel}}</td>
+                    <td>{{gymnast.mHigh}}</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
