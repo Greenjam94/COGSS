@@ -28,7 +28,7 @@ cogss.controller("addMeetModalCtrl", ["$scope", "$uibModal", function ($scope, $
     };
 }]);
 
-cogss.controller('addMeetModalInstanceCtrl', ["$scope", "$uibModalInstance", function ($scope, $uibModalInstance) {
+cogss.controller('addMeetModalInstanceCtrl', ["$scope", "$uibModalInstance", "$http", function ($scope, $uibModalInstance, $http) {
 
     $scope.host = "";
     $scope.name = "";
