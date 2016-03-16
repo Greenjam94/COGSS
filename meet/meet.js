@@ -9,9 +9,28 @@ cogss.controller("MeetCtrl", ["$scope", "$http", "$routeParams", function ($scop
     meet.men = {};
     meet.users = {};
 
+    $scope.meetID = meetID;
+    $scope.teamID = 0;
+    $scope.public = 0;
+
+    $scope.sortBy = 'score';
+    $scope.SortBy = 'Score'; //For team score sorting high to low
+    $scope.sortReverse = true;
+    $scope.filter = '';
+
+    $scope.wteams = [];
+    $scope.mteams = [];
+
     $http.get("/meets/"+meetID).then(function(res) {
         meet.info = res.data;
-        //console.log(meet.info.womensTeams);
+    }).then(function() {
+        for (var i=0; i < meet.info.womensTeams.length; i++) {
+            $scope.wteams[meet.info.womensTeams[i].teamID] = meet.info.womensTeams[i].name;
+        }
+        for (var j=0; j < meet.info.mensTeams.length; j++) {
+            $scope.mteams[meet.info.mensTeams[j].teamID] = meet.info.mensTeams[j].name;
+        }
+        console.log($scope.mteams);
     });
 
     $http.get("/gymnasts/"+meetID+"/women/").then(function(res) {
@@ -25,15 +44,6 @@ cogss.controller("MeetCtrl", ["$scope", "$http", "$routeParams", function ($scop
     $http.get("/users/"+meetID).then(function(res) {
         meet.users = res.data;
     });
-
-    $scope.meetID = meetID;
-    $scope.teamID = 0;
-    $scope.public = 0;
-
-    $scope.sortBy = 'score';
-    $scope.SortBy = 'Score'; //For team score sorting high to low
-    $scope.sortReverse = true;
-    $scope.filter = '';
 
     $scope.pickTeam = function(tid) {
         $scope.teamID = tid;

@@ -249,7 +249,7 @@ app.put("/gymnasts", function (req, res) {
                                 connection.query(
                                     'UPDATE teams ' +
                                     '   SET Score = ' +
-                                    'SELECT SUM(wVault)+SUM(wBars)+SUM(wBeam)+SUM(wFloor) ' +
+                                    '(SELECT SUM(wVault)+SUM(wBars)+SUM(wBeam)+SUM(wFloor) ' +
                                     '  FROM gymnasts ' +
                                     ' WHERE meetID = ' + meetID +
                                     '   AND teamID = ' + teamID +
@@ -264,7 +264,7 @@ app.put("/gymnasts", function (req, res) {
                                 connection.query(
                                     'UPDATE teams ' +
                                     '   SET Score = ' +
-                                    'SELECT SUM(mFloor)+SUM(mPommel)+SUM(mRings)+SUM(mVault)+SUM(mParallel)+SUM(mHigh) ' +
+                                    '(SELECT SUM(mFloor)+SUM(mPommel)+SUM(mRings)+SUM(mVault)+SUM(mParallel)+SUM(mHigh) ' +
                                     '  FROM gymnasts ' +
                                     ' WHERE meetID = ' + meetID +
                                     '   AND teamID = ' + teamID +
