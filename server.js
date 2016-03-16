@@ -22,7 +22,7 @@ connection.connect(function(err) {
     }
 });
 
-app.use(express.static(__dirname));
+app.use(express.static('dist'));
 app.use(bodyParser.json());
 
 
