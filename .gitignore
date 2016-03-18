@@ -1,6 +1,5 @@
 node_modules/
-target/
-build/
+public/
 .DS_Store
 out
 *.iml

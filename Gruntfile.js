@@ -7,6 +7,74 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
+        clean: {
+            public: {
+                src: 'public'
+            }
+        },
+
+        concat: {
+            project: {
+                options: {
+
+                },
+                src: 'source/controllers/*.js',
+                dest: 'public/js/app.js'
+            },
+            libraries: {
+                src: [
+                    'node_modules/angular/angular.min.js',
+                    'node_modules/angular-route/angular-route.min.js',
+                    'node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js'],
+                dest: 'public/js/libraries.js'
+            },
+            styles: {
+                src:'node_modules/bootstrap/dist/css/bootstrap.min.css',
+                dest:'public/css/styles.css'
+            }
+        },
+
+        less: {
+            project: {
+                files: [
+                    {
+                        'public/css/app.css' : 'source/app.less'
+                    }
+                ]
+            }
+        },
+
+        copy: {
+            html: {
+                files: [
+                    {
+                        expand: true,
+                        flatten: true,
+                        src: ['source/views/*'],
+                        dest: 'public/'
+                    }
+                ]
+            },
+            font: {
+                files: [
+                    {
+                        expand: true,
+                        flatten: true,
+                        src: ['node_modules/bootstrap/dist/fonts/*'],
+                        dest: 'public/fonts/'
+                    }
+                ]
+            }
+        },
+
+        uglify: {
+            app: {
+                files: {
+                    'public/js/app.min.js' : 'public/js/app.js'
+                }
+            }
+        },
+
         watch: {
 
             // Util - If Gruntfile.js changes -  reload watch (which will also prune and install new packages)
@@ -35,23 +103,19 @@ module.exports = function (grunt) {
                 ],
                 tasks: ['less:project']
             }
-        },
-
-        less: {
-            project: {
-                files: [
-                    {
-                        expand: true,
-                        src: ['app.less'],
-                        ext: '.css'
-                    }
-                ]
-            }
         }
     });
 
     // Tasks
-    grunt.registerTask('default', ['less', 'watch']);
+    grunt.registerTask('default', ['clean', 'less', 'watch']);
+
+    grunt.registerTask('build', [
+        'clean:public',
+        'concat',
+        'copy',
+        'less',
+        'uglify:app'
+    ]);
 
     // Warning task to let people know if the package.json file has changed
     grunt.task.registerTask('packageWarning', 'A console warning that the package.json file has changed', function () {
