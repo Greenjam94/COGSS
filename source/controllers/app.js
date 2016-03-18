@@ -4,27 +4,27 @@ cogss.config(['$routeProvider',
     function($routeProvider) {
         $routeProvider
             .when("/", {
-                templateUrl: "/dist/home/home.html",
+                templateUrl: "home.html",
                 controller: "HomeCtrl"
             })
 
             .when("/help", {
-                templateUrl: "/dist/help/help.html",
+                templateUrl: "help.html",
                 controller: "HelpCtrl"
             })
 
             .when("/:meetId/teams", {
-                templateUrl: "/dist/meet/teams.html",
+                templateUrl: "teams.html",
                 controller: "MeetCtrl"
             })
 
             .when("/:meetId/individuals", {
-                templateUrl: "/dist/meet/indivs.html",
+                templateUrl: "indivs.html",
                 controller: "MeetCtrl"
             })
 
             .when("/:meetId/settings", {
-                templateUrl: "/dist/meet/settings.html",
+                templateUrl: "settings.html",
                 controller: "MeetCtrl"
             });
     }

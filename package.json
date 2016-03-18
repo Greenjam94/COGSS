@@ -1,13 +1,14 @@
 {
     "name": "cogss-grunt-package",
-    "version": "0.0.2",
+    "version": "2.0.0",
     "private": true,
     "description": "Collegiate Online Gymnastics Scoring System (COGSS) Grunt Package",
-    "main": "index.html",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+    "main": "cogss",
+    "author": {
+        "name": "James Green",
+        "email": "greenjam94@gmail.com",
+        "url": "https://greenjam94.me"
     },
-    "author": "James Green",
     "repository": {
         "type": "git",
         "url": "https://github.com/Greenjam94/COGSS"
@@ -22,7 +23,11 @@
         "bootstrap": "3.3.6",
         "express": "4.x",
         "grunt": "^0.4.5",
+        "grunt-contrib-concat": "*",
+        "grunt-contrib-copy": "*",
+        "grunt-contrib-clean": "*",
         "grunt-contrib-less": "*",
+        "grunt-contrib-uglify": "*",
         "grunt-contrib-watch": "*",
         "lodash": "*",
         "matchdep": "*",

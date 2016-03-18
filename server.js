@@ -22,10 +22,8 @@ connection.connect(function(err) {
     }
 });
 
-app.use(express.static('dist'));
+app.use(express.static('public'));
 app.use(bodyParser.json());
-
-
 
 //--------------------------------------------- API ---------------------------------------------//
 //Simple heartbeat api to test the server is live

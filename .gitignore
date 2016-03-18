@@ -1,12 +1,11 @@
 node_modules/
-target/
-build/
+public/
 .DS_Store
+.idea
 out
 *.iml
 *.ipr
 *.iws
-.idea
 .settings
 .classpath
 .project
