@@ -24,8 +24,11 @@ module.exports = function (grunt) {
             libraries: {
                 src: [
                     'node_modules/angular/angular.min.js',
+                    'node_modules/angular-animate/angular-animate.min.js',
                     'node_modules/angular-route/angular-route.min.js',
-                    'node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js'],
+                    'node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js',
+                    'node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js'
+                ],
                 dest: 'public/js/libraries.js'
             },
             styles: {

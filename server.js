@@ -245,32 +245,158 @@ app.put("/gymnasts", function (req, res) {
                             if (err) throw err;
                             if (gender == 0) {
                                 connection.query(
-                                    'UPDATE teams ' +
-                                    '   SET Score = ' +
-                                    '(SELECT SUM(wVault)+SUM(wBars)+SUM(wBeam)+SUM(wFloor) ' +
-                                    '  FROM gymnasts ' +
-                                    ' WHERE meetID = ' + meetID +
-                                    '   AND teamID = ' + teamID +
-                                    ' LIMIT 4)' +
-                                    ' WHERE teamID =' + teamID,
+                                    'UPDATE teams '+
+                                    ' SET wVault = (SELECT SUM(wVault) FROM ('+
+                                    'SELECT wVault'+
+                                    ' FROM gymnasts'+
+                                    ' WHERE meetID =' + meetID+
+                                    ' AND teamID =' + teamID+
+                                    ' ORDER BY wVault DESC'+
+                                    ' LIMIT 4) as vault)'+
+                                    ' WHERE teamID ='+teamID,
                                     function (err) {
                                         if (err) throw err;
-                                        res.status(200).send(JSON.stringify(allAround));
+                                        connection.query(
+                                            ' UPDATE teams'+
+                                            ' SET wBars = (SELECT SUM(wBars) FROM ('+
+                                            'SELECT wBars'+
+                                            ' FROM gymnasts'+
+                                            ' WHERE meetID = '+ meetID+
+                                            ' AND teamID = '+ teamID +
+                                            ' ORDER BY wBars DESC'+
+                                            ' LIMIT 4) as bars)'+
+                                            ' WHERE teamID = '+teamID,
+                                            function (err) {
+                                                if (err) throw err;
+                                                connection.query(
+                                                    ' UPDATE teams'+
+                                                    ' SET wBeam = (SELECT SUM(wBeam) FROM ('+
+                                                    'SELECT wBeam'+
+                                                    ' FROM gymnasts'+
+                                                    ' WHERE meetID = '+meetID+
+                                                    ' AND teamID = '+teamID+
+                                                    ' ORDER BY wBeam DESC'+
+                                                    ' LIMIT 4) as beam)'+
+                                                    ' WHERE teamID = '+teamID,
+                                                    function (err) {
+                                                        if (err) throw err;
+                                                        connection.query(
+                                                            ' UPDATE teams'+
+                                                            ' SET wFloor = (SELECT SUM(wFloor) FROM ('+
+                                                            'SELECT wFloor'+
+                                                            ' FROM gymnasts'+
+                                                            ' WHERE meetID = '+meetID+
+                                                            ' AND teamID = '+teamID+
+                                                            ' ORDER BY wFloor DESC'+
+                                                            ' LIMIT 4) as floor)'+
+                                                            ' WHERE teamID = '+teamID,
+                                                            function (err) {
+                                                                if (err) throw err;
+                                                                connection.query(
+                                                                    ' UPDATE teams SET Score = wVault + wBars + wBeam + wFloor WHERE teamID = '+teamID+';',
+                                                                    function (err) {
+                                                                        if (err) throw err;
+                                                                        res.status(200).send(JSON.stringify(allAround));
+                                                                    }
+                                                                );
+                                                            }
+                                                        );
+                                                    }
+                                                );
+                                            }
+                                        );
                                     }
                                 );
                             } else if (gender == 1) {
                                 connection.query(
-                                    'UPDATE teams ' +
-                                    '   SET Score = ' +
-                                    '(SELECT SUM(mFloor)+SUM(mPommel)+SUM(mRings)+SUM(mVault)+SUM(mParallel)+SUM(mHigh) ' +
-                                    '  FROM gymnasts ' +
-                                    ' WHERE meetID = ' + meetID +
-                                    '   AND teamID = ' + teamID +
-                                    ' LIMIT 3)' +
-                                    ' WHERE teamID =' + teamID,
+                                    'UPDATE teams '+
+                                    ' SET mFloor = (SELECT SUM(mFloor) FROM ('+
+                                    ' SELECT mFloor '+
+                                    ' FROM gymnasts  '+
+                                    ' WHERE meetID =  '+meetID+
+                                    ' AND teamID = '+teamID+
+                                    ' ORDER BY mFloor DESC '+
+                                    ' LIMIT 3) as floor) '+
+                                    ' WHERE teamID =  '+teamID,
                                     function (err) {
                                         if (err) throw err;
-                                        res.status(200).send(JSON.stringify(allAround));
+                                        connection.query(
+                                            ' UPDATE teams  '+
+                                            ' SET mPommel = (SELECT SUM(mPommel) FROM (   '+
+                                            ' SELECT mPommel '+
+                                            '  FROM gymnasts  '+
+                                            ' WHERE meetID =  '+meetID+
+                                            ' AND teamID =  '+teamID+
+                                            ' ORDER BY mPommel DESC '+
+                                            ' LIMIT 3) as pommel) '+
+                                            ' WHERE teamID = '+teamID,
+                                            function (err) {
+                                                if (err) throw err;
+                                                connection.query(
+                                                    ' UPDATE teams  '+
+                                                    ' SET mRings = (SELECT SUM(mRings) FROM (     '+
+                                                    ' SELECT mRings '+
+                                                    ' FROM gymnasts  '+
+                                                    ' WHERE meetID =  '+ meetID+
+                                                    ' AND teamID =  '+ teamID+
+                                                    ' ORDER BY mRings DESC '+
+                                                    ' LIMIT 3) as rings) '+
+                                                    ' WHERE teamID =  '+teamID,
+                                                    function (err) {
+                                                        if (err) throw err;
+                                                        connection.query(
+                                                            ' UPDATE teams  '+
+                                                            ' SET mVault = (SELECT SUM(mVault) FROM (    '+
+                                                            ' SELECT mVault '+
+                                                            ' FROM gymnasts  '+
+                                                            ' WHERE meetID =  '+meetID+
+                                                            ' AND teamID =  '+teamID+
+                                                            ' ORDER BY mVault DESC '+
+                                                            ' LIMIT 3) as vault) '+
+                                                            ' WHERE teamID =  '+teamID,
+                                                            function (err) {
+                                                                if (err) throw err;
+                                                                connection.query(
+                                                                    ' UPDATE teams  '+
+                                                                    ' SET mParallel = (SELECT SUM(mParallel) FROM (     '+
+                                                                    ' SELECT mParallel '+
+                                                                    ' FROM gymnasts  '+
+                                                                    ' WHERE meetID =  '+meetID+
+                                                                    ' AND teamID = '+teamID+
+                                                                    ' ORDER BY mParallel DESC '+
+                                                                    ' LIMIT 3) as pbars) '+
+                                                                    ' WHERE teamID =  '+teamID,
+                                                                    function (err) {
+                                                                        if (err) throw err;
+                                                                        connection.query(
+                                                                            ' UPDATE teams  '+
+                                                                            ' SET mHigh = (SELECT SUM(mHigh) FROM (       '+
+                                                                            ' SELECT mHigh '+
+                                                                            ' FROM gymnasts  '+
+                                                                            ' WHERE meetID =  '+meetID+
+                                                                            ' AND teamID =  '+teamID+
+                                                                            ' ORDER BY mHigh DESC '+
+                                                                            ' LIMIT 3) as high) '+
+                                                                            ' WHERE teamID =  '+teamID ,
+                                                                            function (err) {
+                                                                                if (err) throw err;
+                                                                                connection.query(
+                                                                                    'UPDATE teams SET Score = mFloor + mPommel + mRings + mVault + mParallel + mHigh WHERE teamID = '+teamID,
+                                                                                    function (err) {
+                                                                                        if (err) throw err;
+                                                                                        res.status(200).send(JSON.stringify(allAround));
+                                                                                    }
+                                                                                );
+                                                                            }
+                                                                        );
+                                                                    }
+                                                                );
+                                                            }
+                                                        );
+                                                    }
+                                                );
+                                            }
+                                        );
                                     }
                                 );
                             }
